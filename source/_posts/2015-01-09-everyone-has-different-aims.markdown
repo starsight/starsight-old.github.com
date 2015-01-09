@@ -3,7 +3,7 @@ layout: post
 title: "人各有志，从来就不是你堕落的理由"
 date: 2015-01-09 22:57:29 +0800
 comments: true
-categories: ["2015-01"]
+categories: 
 ---
 ###人各有志，从来就不是你堕落的理由
 有些人就是喜欢用借口来狡辩自己的无能。
