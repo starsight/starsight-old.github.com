@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "everyone has different aims"
+title: "人各有志，从来就不是你堕落的理由"
 date: 2015-01-09 22:57:29 +0800
 comments: true
 categories: 
