@@ -3,7 +3,7 @@ layout: post
 title: "快去做吧"
 date: 2015-01-04 14:22:25 +0800
 comments: true
-categories: 2015
+categories: ["2015-01"]
 ---
 
 
