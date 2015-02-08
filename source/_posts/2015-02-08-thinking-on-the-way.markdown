@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "归路的一点思考"
+title: "走在归路上的一点思考"
 date: 2015-02-08 21:16:24 +0800
 comments: true
 categories: ['2015-02']
