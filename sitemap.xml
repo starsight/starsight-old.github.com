@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://starsight.github.io/blog/2015/11/27/wechat-article-1/</loc>
+    <lastmod>2015-11-27T18:47:16+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>http://starsight.github.io/blog/2015/11/22/die-in-plan/</loc>
     <lastmod>2015-11-22T22:58:50+08:00</lastmod>
     <priority>0.8</priority>
@@ -47,13 +52,13 @@
   </url>
   <url>
     <loc>http://starsight.github.io/blog/archives/</loc>
-    <lastmod>2015-11-22T23:10:24+08:00</lastmod>
+    <lastmod>2015-11-27T18:49:47+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>http://starsight.github.io/</loc>
-    <lastmod>2015-11-22T23:10:24+08:00</lastmod>
+    <lastmod>2015-11-27T18:49:47+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
