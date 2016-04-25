@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Raspberry Pi 3 Wifi问题 - Starsight</title>
+  <meta name="author" content="wenjie">
+
+  
+  <meta name="description" content="树莓派自带wifi模块，应该说是很实用的功能，用法其实和USB wifi一样使用，但是树莓派3死活连接不上我的wifi，于是我就参照USB wifi的使用。 先用SSH登陆： 1
+sudo vi /etc/wpa_supplicant/wpa_supplicant.conf 由于回宿舍，没有显示器 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://starsight.github.io/blog/2016/04/21/raspberry-wifi-problems">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Starsight" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Starsight</a></h1>
+  
+    <h2>不要让时代的悲剧成为你个人的悲剧</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="starsight.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Raspberry Pi 3 Wifi问题</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-04-21T19:59:09+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>7:59 pm</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://starsight.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>树莓派自带wifi模块，应该说是很实用的功能，用法其实和USB wifi一样使用，但是树莓派3死活连接不上我的wifi，于是我就参照USB wifi的使用。</p>
+
+<!--more-->
+
+
+<p>先用SSH登陆：</p>
+
+<p><img src="/images/wifi/1.jpg"></p>
+
+<p><img src="/images/wifi/2.jpg"></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo vi /etc/wpa_supplicant/wpa_supplicant.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>由于回宿舍，没有显示器，所以需要直接修改此文件：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>network={
+</span><span class='line'>        ssid="ssid"
+</span><span class='line'>        psk="password"
+</span><span class='line'>        key_mgmt=WPA-PSK
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>按照道理说，直接点图形界面的wifi连接，输入密码就可以了，然而我的死活就是不行</p>
+
+<p>尝试加入一些配置选项：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>proto=WAP2
+</span><span class='line'>pairwise=TKIP
+</span><span class='line'>group=TKIP</span></code></pre></td></tr></table></div></figure>
+
+
+<p>依旧不行</p>
+
+<p>于是我就换一种方法就行修改：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo vim /etc/network/interfaces
+</span><span class='line'>
+</span><span class='line'>auto wlan0
+</span><span class='line'>iface wlan0 inet dhcp
+</span><span class='line'>    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>依旧不行。。</p>
+
+<p>后来</p>
+
+<p>……</p>
+
+<p>……</p>
+
+<p>……</p>
+
+<p>……</p>
+
+<p>（这是个悲伤的故事）</p>
+
+<p>发现路由器是斐讯的，网上有人说不支持、、不支持。。。</p>
+
+<p>于是我试了下我手机开的热点，直接在图形化界面就连上了……</p>
+
+<p>折腾了一天，好了，wifi算是可以用了（悲伤好大）</p>
+
+<p>总结：wifi好不好用看路由器，TP的可以，腾达的也行，同时最好使用最新的3-18的镜像，之前版本可以有问题。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">wenjie</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-04-21T19:59:09+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>7:59 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/2016-04/'>2016-04</a>, <a class='category' href='/blog/categories/shu-mei-pai/'>树莓派</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/04/20/raspberry-dilatation-and-samba/" title="Previous Post: Raspberry Pi 3 开箱+扩容+samba">&laquo; Raspberry Pi 3 开箱+扩容+samba</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2016/04/22/raspberry-baiduyun/" title="Next Post: Raspberry Pi 3 中文显示及输入+百度云传输">Raspberry Pi 3 中文显示及输入+百度云传输 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section> 
+  <h1>文章分类</h1> 
+  <ul id="categories"> 
+    <li class='category'><a href='/blog/categories/2015-01/'>2015-01 (4)</a></li>
+<li class='category'><a href='/blog/categories/2015-02/'>2015-02 (1)</a></li>
+<li class='category'><a href='/blog/categories/2015-03/'>2015-03 (1)</a></li>
+<li class='category'><a href='/blog/categories/2015-04/'>2015-04 (1)</a></li>
+<li class='category'><a href='/blog/categories/2015-07/'>2015-07 (1)</a></li>
+<li class='category'><a href='/blog/categories/2015-11/'>2015-11 (2)</a></li>
+<li class='category'><a href='/blog/categories/2016-04/'>2016-04 (5)</a></li>
+<li class='category'><a href='/blog/categories/shu-mei-pai/'>树莓派 (5)</a></li>
+ 
+  </ul> 
+</section><section>
+  <h1>最近文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/04/24/raspberry-weibo/">Raspberry Pi 3 发微博</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/23/raspberry-dnsmasq/">Raspberry Pi 3 搭建本地DNS服务器</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/22/raspberry-baiduyun/">Raspberry Pi 3 中文显示及输入+百度云传输</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/21/raspberry-wifi-problems/">Raspberry Pi 3 Wifi问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/20/raspberry-dilatation-and-samba/">Raspberry Pi 3 开箱+扩容+samba</a>
+      </li>
+    
+  </ul>
+</section>
+
+﻿
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - wenjie -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e4b4e5c7c09b80a0ea7080386026279a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'hewenjie';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://starsight.github.io/blog/2016/04/21/raspberry-wifi-problems/';
+        var disqus_url = 'http://starsight.github.io/blog/2016/04/21/raspberry-wifi-problems/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

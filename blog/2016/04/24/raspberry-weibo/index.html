@@ -1,0 +1,377 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Raspberry Pi 3 发微博 - Starsight</title>
+  <meta name="author" content="wenjie">
+
+  
+  <meta name="description" content="本打算做个微博机器人，但是貌似微博把接口的权限改变了，不是很好弄，所以这里先做个半自动的。 首先去open.weibo.com 先建立自己的应用，你会得到一个 App Key App Secret ，除此以外我们需要在 应用信息-高级信息中，把授权回调页 写成https://api.weibo. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://starsight.github.io/blog/2016/04/24/raspberry-weibo">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Starsight" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Starsight</a></h1>
+  
+    <h2>不要让时代的悲剧成为你个人的悲剧</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="starsight.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Raspberry Pi 3 发微博</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-04-24T21:57:51+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>9:57 pm</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://starsight.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>本打算做个微博机器人，但是貌似微博把接口的权限改变了，不是很好弄，所以这里先做个半自动的。</p>
+
+<p>首先去open.weibo.com 先建立自己的应用，你会得到一个 App Key App Secret ，除此以外我们需要在 应用信息-高级信息中，把授权回调页 写成<a href="https://api.weibo.com/oauth2/default.html">https://api.weibo.com/oauth2/default.html</a> 取消授权回调页 同样即可</p>
+
+<!--more-->
+
+
+<p><img src="/images/weibo/1.jpg"></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#coding=utf-8
+</span><span class='line'>
+</span><span class='line'>#! /usr/bin/python
+</span><span class='line'>"""
+</span><span class='line'>引入Python SDK的包
+</span><span class='line'>"""
+</span><span class='line'>import weibo
+</span><span class='line'>
+</span><span class='line'>"""
+</span><span class='line'>授权需要的三个信息，APP_KEY、APP_SECRET为创建应用时分配的，CALL_BACK在应用的设置网页中
+</span><span class='line'>设置的。【注意】这里授权时使用的CALL_BACK地址与应用中设置的CALL_BACK必须一致，否则会出
+</span><span class='line'>现redirect_uri_mismatch的错误。
+</span><span class='line'>"""
+</span><span class='line'>APP_KEY = '21523394XX'  
+</span><span class='line'>APP_SECRET = 'eb0da29dd163c64ec26dc6afc3b7XXXX'  
+</span><span class='line'>CALL_BACK = 'https://api.weibo.com/oauth2/default.html'
+</span><span class='line'>
+</span><span class='line'>def run():  
+</span><span class='line'>#weibo模块的APIClient是进行授权、API操作的类，先定义一个该类对象，传入参数为APP_KEY, APP_SECRET, CALL_BACK
+</span><span class='line'>        client = weibo.APIClient(APP_KEY, APP_SECRET, CALL_BACK)  
+</span><span class='line'>#获取该应用（APP_KEY是唯一的）提供给用户进行授权的url
+</span><span class='line'>        auth_url = client.get_authorize_url()  
+</span><span class='line'>#打印出用户进行授权的url，将该url拷贝到浏览器中，服务器将会返回一个url，该url中包含一个code字段（如图1所示）
+</span><span class='line'>        print "auth_url : " + auth_url  
+</span><span class='line'>#输入该code值（如图2所示）
+</span><span class='line'>        code = raw_input("input the retured code : ")  
+</span><span class='line'>#通过该code获取access_token，r是返回的授权结果，具体参数参考官方文档：
+</span><span class='line'># http://open.weibo.com/wiki/Oauth2/access_token
+</span><span class='line'>        r = client.request_access_token(code)  
+</span><span class='line'>#将access_token和expire_in设置到client对象
+</span><span class='line'>        client.set_access_token(r.access_token, r.expires_in)
+</span><span class='line'>
+</span><span class='line'>#以上步骤就是授权的过程，现在的client就可以随意调用接口进行微博操作了，下面的代码就是用用户输入的内容发一条新微博
+</span><span class='line'>
+</span><span class='line'>        while True:  
+</span><span class='line'>                print "Ready! Do you want to send a new weibo?(y/n)"  
+</span><span class='line'>                choice = raw_input()  
+</span><span class='line'>                if choice =='y' or choice =='Y':  
+</span><span class='line'>                        content = raw_input('input the your new weibo content : ')  
+</span><span class='line'>                        if content:  
+</span><span class='line'>#调用接口发一条新微薄，status参数就是微博内容
+</span><span class='line'>                                client.statuses.update.post(status=content)  
+</span><span class='line'>                                print "Send succesfully!"  
+</span><span class='line'>                                break;  
+</span><span class='line'>                        else:  
+</span><span class='line'>                                print "Error! Empty content!"  
+</span><span class='line'>                if choice =='n' or choice =='N':  
+</span><span class='line'>                        break
+</span><span class='line'>
+</span><span class='line'>if __name__ == "__main__":  
+</span><span class='line'>        run()     
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>   <br/>
+weibo 这个库来自于 廖雪峰-Python微博SDK <a href="http://github.liaoxuefeng.com/sinaweibopy/">http://github.liaoxuefeng.com/sinaweibopy/</a></p>
+
+<p>运行之后会让你登录：</p>
+
+<p><img src="/images/weibo/2.jpg"></p>
+
+<p>我们复制控制台显示出来的链接，粘贴到浏览器去获得code：</p>
+
+<p><img src="/images/weibo/3.jpg"></p>
+
+<p>如果第一次登微博，就需要输一下帐号，密码，我的之前已经登陆过了。</p>
+
+<p>看地址栏最后有一串字符：</p>
+
+<p><img src="/images/weibo/4.jpg"></p>
+
+<p>然后会问你要不要发微博，我们来发一条：</p>
+
+<p><img src="/images/weibo/5.jpg"></p>
+
+<p>去微博看一看：</p>
+
+<p><img src="/images/weibo/6.jpg"></p>
+
+<p>在之前，微博api是可以自己获得code，不需要手动到浏览器去粘贴获得，但是现在好像不可以了（但是还是有途径的），下一次再试试能不能自动登录。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">wenjie</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-04-24T21:57:51+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>9:57 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/2016-04/'>2016-04</a>, <a class='category' href='/blog/categories/shu-mei-pai/'>树莓派</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/04/23/raspberry-dnsmasq/" title="Previous Post: Raspberry Pi 3 搭建本地DNS服务器">&laquo; Raspberry Pi 3 搭建本地DNS服务器</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section> 
+  <h1>文章分类</h1> 
+  <ul id="categories"> 
+    <li class='category'><a href='/blog/categories/2015-01/'>2015-01 (4)</a></li>
+<li class='category'><a href='/blog/categories/2015-02/'>2015-02 (1)</a></li>
+<li class='category'><a href='/blog/categories/2015-03/'>2015-03 (1)</a></li>
+<li class='category'><a href='/blog/categories/2015-04/'>2015-04 (1)</a></li>
+<li class='category'><a href='/blog/categories/2015-07/'>2015-07 (1)</a></li>
+<li class='category'><a href='/blog/categories/2015-11/'>2015-11 (2)</a></li>
+<li class='category'><a href='/blog/categories/2016-04/'>2016-04 (5)</a></li>
+<li class='category'><a href='/blog/categories/shu-mei-pai/'>树莓派 (5)</a></li>
+ 
+  </ul> 
+</section><section>
+  <h1>最近文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/04/24/raspberry-weibo/">Raspberry Pi 3 发微博</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/23/raspberry-dnsmasq/">Raspberry Pi 3 搭建本地DNS服务器</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/22/raspberry-baiduyun/">Raspberry Pi 3 中文显示及输入+百度云传输</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/21/raspberry-wifi-problems/">Raspberry Pi 3 Wifi问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/20/raspberry-dilatation-and-samba/">Raspberry Pi 3 开箱+扩容+samba</a>
+      </li>
+    
+  </ul>
+</section>
+
+﻿
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - wenjie -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e4b4e5c7c09b80a0ea7080386026279a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'hewenjie';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://starsight.github.io/blog/2016/04/24/raspberry-weibo/';
+        var disqus_url = 'http://starsight.github.io/blog/2016/04/24/raspberry-weibo/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

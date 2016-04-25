@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Raspberry Pi 3 搭建本地DNS服务器 - Starsight</title>
+  <meta name="author" content="wenjie">
+
+  
+  <meta name="description" content="需求：上网时莫名地弹出广告，或者莫名的流量被消耗掉导致网速变慢。其次是部分网站域名不能正常被解析，莫名其妙地打不开，或者时好时坏。 管理下局域网的DNS（双十一的时候，把某宝网站直接给解析到本地ip，打不开网页，O(∩_∩)O哈哈~） 这里我用的是dnsmasq 安装比较简单： 1
+sudo &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://starsight.github.io/blog/2016/04/23/raspberry-dnsmasq">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Starsight" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Starsight</a></h1>
+  
+    <h2>不要让时代的悲剧成为你个人的悲剧</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="starsight.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Raspberry Pi 3 搭建本地DNS服务器</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-04-23T21:39:04+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2016</span></span> <span class='time'>9:39 pm</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://starsight.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>需求：上网时莫名地弹出广告，或者莫名的流量被消耗掉导致网速变慢。其次是部分网站域名不能正常被解析，莫名其妙地打不开，或者时好时坏。<!--more--></p>
+
+<p>管理下局域网的DNS（双十一的时候，把某宝网站直接给解析到本地ip，打不开网页，O(∩_∩)O哈哈~）</p>
+
+<p>这里我用的是dnsmasq</p>
+
+<p>安装比较简单：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install -y dnsmasq</span></code></pre></td></tr></table></div></figure>
+
+
+<p>下面我们就需要配置dnsmasq了，配置文件一般位于路径/etc/dnsmasq.conf</p>
+
+<p>这个文件里全是注释的内容，相当于空文件。我先备份了此文件，然后修改了一些配置：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>resolv-file=/etc/wenjie_dns.conf
+</span><span class='line'>strict-order
+</span><span class='line'>cache-size=1500
+</span><span class='line'>listen-address=127.0.0.1,218.195.54.90
+</span><span class='line'>address=/taobao.com/218.195.54.90</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>resolv.conf:文件主要的作用是DNS客户机配置文件，设置DNS服务器的IP地址及DNS域名.如果我们不配置的话，默认使用 /etc/resolv.conf 网上有人说每次开机此文件都会被重写，所以就自己指定/etc/wj_dns.conf
+</span><span class='line'>
+</span><span class='line'>strict-order: 按照resolv.conf中nameserver顺序依次使用，本行被注释后会随机的调用nameserver
+</span><span class='line'>
+</span><span class='line'>cache-size: 缓存解析条数，默认是150
+</span><span class='line'>
+</span><span class='line'>listen-address: 监听地址，listen-address=127.0.0.1，表示这个 dnsmasq 本机自己使用有效。
+</span><span class='line'>  注意：如果你想让本机所在的局域网的其它电脑也能够使用上Dnsmasq，应该把本机（树莓派）的局域网IP加上去：listen-address=218.195.54.90（树莓派的ip）,127.0.0.1
+</span><span class='line'>
+</span><span class='line'>address:很明显就是我们想劫下的域名了</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在/etc/wenjie_dns.conf 写入 DNS服务器，本地的当然得放在第一个，下面的写其它稳定的就行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>nameserver 127.0.0.1
+</span><span class='line'>nameserver 202.206.240.13
+</span><span class='line'>nameserver 202.206.240.12</span></code></pre></td></tr></table></div></figure>
+
+
+<p>重启服务：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo service dnsmasq restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p>将Dnsmasq作为本地DNS服务器使用，直接修改电脑的本地DNS的IP地址即可。</p>
+
+<p><img src="/images/dns/1.jpg"></p>
+
+<p>ping 一下试试</p>
+
+<p><img src="/images/dns/2.jpg"></p>
+
+<p>大功告成。</p>
+
+<p>拦截一些广告，也可以把域名劫到127.0.0.1
+bogus-nxdomain 这个配置文件里的选项可以反dns劫</p>
+
+<p>对于dns缓存，可以用dig 命令看一下效果。
+树莓派没有安装，可以安装一下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install dnsutils</span></code></pre></td></tr></table></div></figure>
+
+
+<p>还有no-hosts 选项 ，默认情况下这是注释掉的, dnsmasq 会首先寻找本地的 /etc/hosts 文件，再去寻找缓存下来的域名, 最后去上游 dns 服务器寻找。所以/etc/hosts才是dnsmasq第一个寻找的地方。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">wenjie</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-04-23T21:39:04+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2016</span></span> <span class='time'>9:39 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/2016-04/'>2016-04</a>, <a class='category' href='/blog/categories/shu-mei-pai/'>树莓派</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/04/22/raspberry-baiduyun/" title="Previous Post: Raspberry Pi 3 中文显示及输入+百度云传输">&laquo; Raspberry Pi 3 中文显示及输入+百度云传输</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2016/04/24/raspberry-weibo/" title="Next Post: Raspberry Pi 3 发微博">Raspberry Pi 3 发微博 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section> 
+  <h1>文章分类</h1> 
+  <ul id="categories"> 
+    <li class='category'><a href='/blog/categories/2015-01/'>2015-01 (4)</a></li>
+<li class='category'><a href='/blog/categories/2015-02/'>2015-02 (1)</a></li>
+<li class='category'><a href='/blog/categories/2015-03/'>2015-03 (1)</a></li>
+<li class='category'><a href='/blog/categories/2015-04/'>2015-04 (1)</a></li>
+<li class='category'><a href='/blog/categories/2015-07/'>2015-07 (1)</a></li>
+<li class='category'><a href='/blog/categories/2015-11/'>2015-11 (2)</a></li>
+<li class='category'><a href='/blog/categories/2016-04/'>2016-04 (5)</a></li>
+<li class='category'><a href='/blog/categories/shu-mei-pai/'>树莓派 (5)</a></li>
+ 
+  </ul> 
+</section><section>
+  <h1>最近文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/04/24/raspberry-weibo/">Raspberry Pi 3 发微博</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/23/raspberry-dnsmasq/">Raspberry Pi 3 搭建本地DNS服务器</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/22/raspberry-baiduyun/">Raspberry Pi 3 中文显示及输入+百度云传输</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/21/raspberry-wifi-problems/">Raspberry Pi 3 Wifi问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/20/raspberry-dilatation-and-samba/">Raspberry Pi 3 开箱+扩容+samba</a>
+      </li>
+    
+  </ul>
+</section>
+
+﻿
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - wenjie -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e4b4e5c7c09b80a0ea7080386026279a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'hewenjie';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://starsight.github.io/blog/2016/04/23/raspberry-dnsmasq/';
+        var disqus_url = 'http://starsight.github.io/blog/2016/04/23/raspberry-dnsmasq/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

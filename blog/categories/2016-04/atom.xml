@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 2016-04 | Starsight]]></title>
+  <link href="http://starsight.github.io/blog/categories/2016-04/atom.xml" rel="self"/>
+  <link href="http://starsight.github.io/"/>
+  <updated>2016-04-25T13:56:19+08:00</updated>
+  <id>http://starsight.github.io/</id>
+  <author>
+    <name><![CDATA[wenjie]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Pi 3 发微博]]></title>
+    <link href="http://starsight.github.io/blog/2016/04/24/raspberry-weibo/"/>
+    <updated>2016-04-24T21:57:51+08:00</updated>
+    <id>http://starsight.github.io/blog/2016/04/24/raspberry-weibo</id>
+    <content type="html"><![CDATA[<p>本打算做个微博机器人，但是貌似微博把接口的权限改变了，不是很好弄，所以这里先做个半自动的。</p>
+
+<p>首先去open.weibo.com 先建立自己的应用，你会得到一个 App Key App Secret ，除此以外我们需要在 应用信息-高级信息中，把授权回调页 写成<a href="https://api.weibo.com/oauth2/default.html">https://api.weibo.com/oauth2/default.html</a> 取消授权回调页 同样即可</p>
+
+<!--more-->
+
+
+<p><img src="/images/weibo/1.jpg"></p>
+
+<pre><code>#coding=utf-8
+
+#! /usr/bin/python
+"""
+引入Python SDK的包
+"""
+import weibo
+
+"""
+授权需要的三个信息，APP_KEY、APP_SECRET为创建应用时分配的，CALL_BACK在应用的设置网页中
+设置的。【注意】这里授权时使用的CALL_BACK地址与应用中设置的CALL_BACK必须一致，否则会出
+现redirect_uri_mismatch的错误。
+"""
+APP_KEY = '21523394XX'  
+APP_SECRET = 'eb0da29dd163c64ec26dc6afc3b7XXXX'  
+CALL_BACK = 'https://api.weibo.com/oauth2/default.html'
+
+def run():  
+#weibo模块的APIClient是进行授权、API操作的类，先定义一个该类对象，传入参数为APP_KEY, APP_SECRET, CALL_BACK
+        client = weibo.APIClient(APP_KEY, APP_SECRET, CALL_BACK)  
+#获取该应用（APP_KEY是唯一的）提供给用户进行授权的url
+        auth_url = client.get_authorize_url()  
+#打印出用户进行授权的url，将该url拷贝到浏览器中，服务器将会返回一个url，该url中包含一个code字段（如图1所示）
+        print "auth_url : " + auth_url  
+#输入该code值（如图2所示）
+        code = raw_input("input the retured code : ")  
+#通过该code获取access_token，r是返回的授权结果，具体参数参考官方文档：
+# http://open.weibo.com/wiki/Oauth2/access_token
+        r = client.request_access_token(code)  
+#将access_token和expire_in设置到client对象
+        client.set_access_token(r.access_token, r.expires_in)
+
+#以上步骤就是授权的过程，现在的client就可以随意调用接口进行微博操作了，下面的代码就是用用户输入的内容发一条新微博
+
+        while True:  
+                print "Ready! Do you want to send a new weibo?(y/n)"  
+                choice = raw_input()  
+                if choice =='y' or choice =='Y':  
+                        content = raw_input('input the your new weibo content : ')  
+                        if content:  
+#调用接口发一条新微薄，status参数就是微博内容
+                                client.statuses.update.post(status=content)  
+                                print "Send succesfully!"  
+                                break;  
+                        else:  
+                                print "Error! Empty content!"  
+                if choice =='n' or choice =='N':  
+                        break
+
+if __name__ == "__main__":  
+        run()       
+</code></pre>
+
+<p>weibo 这个库来自于 廖雪峰-Python微博SDK <a href="http://github.liaoxuefeng.com/sinaweibopy/">http://github.liaoxuefeng.com/sinaweibopy/</a></p>
+
+<p>运行之后会让你登录：</p>
+
+<p><img src="/images/weibo/2.jpg"></p>
+
+<p>我们复制控制台显示出来的链接，粘贴到浏览器去获得code：</p>
+
+<p><img src="/images/weibo/3.jpg"></p>
+
+<p>如果第一次登微博，就需要输一下帐号，密码，我的之前已经登陆过了。</p>
+
+<p>看地址栏最后有一串字符：</p>
+
+<p><img src="/images/weibo/4.jpg"></p>
+
+<p>然后会问你要不要发微博，我们来发一条：</p>
+
+<p><img src="/images/weibo/5.jpg"></p>
+
+<p>去微博看一看：</p>
+
+<p><img src="/images/weibo/6.jpg"></p>
+
+<p>在之前，微博api是可以自己获得code，不需要手动到浏览器去粘贴获得，但是现在好像不可以了（但是还是有途径的），下一次再试试能不能自动登录。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Pi 3 搭建本地DNS服务器]]></title>
+    <link href="http://starsight.github.io/blog/2016/04/23/raspberry-dnsmasq/"/>
+    <updated>2016-04-23T21:39:04+08:00</updated>
+    <id>http://starsight.github.io/blog/2016/04/23/raspberry-dnsmasq</id>
+    <content type="html"><![CDATA[<p>需求：上网时莫名地弹出广告，或者莫名的流量被消耗掉导致网速变慢。其次是部分网站域名不能正常被解析，莫名其妙地打不开，或者时好时坏。<!--more--></p>
+
+<p>管理下局域网的DNS（双十一的时候，把某宝网站直接给解析到本地ip，打不开网页，O(∩_∩)O哈哈~）</p>
+
+<p>这里我用的是dnsmasq</p>
+
+<p>安装比较简单：
+<code>
+sudo apt-get install -y dnsmasq
+</code></p>
+
+<p>下面我们就需要配置dnsmasq了，配置文件一般位于路径/etc/dnsmasq.conf</p>
+
+<p>这个文件里全是注释的内容，相当于空文件。我先备份了此文件，然后修改了一些配置：
+<code>
+resolv-file=/etc/wenjie_dns.conf
+strict-order
+cache-size=1500
+listen-address=127.0.0.1,218.195.54.90
+address=/taobao.com/218.195.54.90
+</code></p>
+
+<pre><code>resolv.conf:文件主要的作用是DNS客户机配置文件，设置DNS服务器的IP地址及DNS域名.如果我们不配置的话，默认使用 /etc/resolv.conf 网上有人说每次开机此文件都会被重写，所以就自己指定/etc/wj_dns.conf
+
+strict-order: 按照resolv.conf中nameserver顺序依次使用，本行被注释后会随机的调用nameserver
+
+cache-size: 缓存解析条数，默认是150
+
+listen-address: 监听地址，listen-address=127.0.0.1，表示这个 dnsmasq 本机自己使用有效。
+    注意：如果你想让本机所在的局域网的其它电脑也能够使用上Dnsmasq，应该把本机（树莓派）的局域网IP加上去：listen-address=218.195.54.90（树莓派的ip）,127.0.0.1
+
+address:很明显就是我们想劫下的域名了
+</code></pre>
+
+<p>在/etc/wenjie_dns.conf 写入 DNS服务器，本地的当然得放在第一个，下面的写其它稳定的就行
+<code>
+nameserver 127.0.0.1
+nameserver 202.206.240.13
+nameserver 202.206.240.12
+</code></p>
+
+<p>重启服务：
+<code>
+sudo service dnsmasq restart
+</code></p>
+
+<p>将Dnsmasq作为本地DNS服务器使用，直接修改电脑的本地DNS的IP地址即可。</p>
+
+<p><img src="/images/dns/1.jpg"></p>
+
+<p>ping 一下试试</p>
+
+<p><img src="/images/dns/2.jpg"></p>
+
+<p>大功告成。</p>
+
+<p>拦截一些广告，也可以把域名劫到127.0.0.1
+bogus-nxdomain 这个配置文件里的选项可以反dns劫</p>
+
+<p>对于dns缓存，可以用dig 命令看一下效果。
+树莓派没有安装，可以安装一下：
+<code>
+sudo apt-get install dnsutils
+</code></p>
+
+<p>还有no-hosts 选项 ，默认情况下这是注释掉的, dnsmasq 会首先寻找本地的 /etc/hosts 文件，再去寻找缓存下来的域名, 最后去上游 dns 服务器寻找。所以/etc/hosts才是dnsmasq第一个寻找的地方。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Pi 3 中文显示及输入+百度云传输]]></title>
+    <link href="http://starsight.github.io/blog/2016/04/22/raspberry-baiduyun/"/>
+    <updated>2016-04-22T21:07:14+08:00</updated>
+    <id>http://starsight.github.io/blog/2016/04/22/raspberry-baiduyun</id>
+    <content type="html"><![CDATA[<p>树莓派系统显示中文的话，大部分都是一个的小方块，还好我们有非常无私的开源者：
+<code>
+sudo apt-get install ttf-wqy-zenhei
+</code>
+文泉驿的开源中文字体，树莓派全网唯一的开源中文字体库</p>
+
+<p>能显示中文，输入也是必不可少的：<!--more-->
+<code>
+sudo apt-get install scim-pinyin
+</code>
+快捷键也是Ctrl+空格
+<code>
+sudo raspi-config
+</code></p>
+
+<p><img src="/images/baiduyun/1.jpg"></p>
+
+<p>然后选择第五项Internationalisation Options，change_locale，在Default locale for the system environment:中选择zh_CN.UTF-8</p>
+
+<p>重启就可以生效啦~</p>
+
+<p>下面装神器：百度云~</p>
+
+<p><a href="https://github.com/houtianze/bypy">https://github.com/houtianze/bypy</a>
+这是地址，把它下载到树莓派上，解压。</p>
+
+<p>我的树莓派好多python库都装了，所以直接：
+<code>
+./bypy.py info
+</code></p>
+
+<p>在浏览器中粘贴那个网址，再输入你的百度账号，
+会得到一串授权码。</p>
+
+<p><img src="/images/baiduyun/2.jpg"></p>
+
+<p>粘贴到刚才的终端上：</p>
+
+<p><img src="/images/baiduyun/3.jpg"></p>
+
+<p>好了，至此就搞定了~</p>
+
+<p>下面测试下：
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>显示使用帮助和所有命令（英文）:
+</span><span class='line'>bypy.py&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;更详细的了解某一个命令：
+</span><span class='line'>bypy.py help &lt;command&gt;&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;显示在云盘（程序的）根目录下文件列表：
+</span><span class='line'>bypy.py list&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;把当前目录同步到云盘：
+</span><span class='line'>bypy.py syncup
+</span><span class='line'>or
+</span><span class='line'>bypy.py upload&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;把云盘内容同步到本地来：
+</span><span class='line'>bypy.py syncdown
+</span><span class='line'>or
+</span><span class='line'>bypy.py downdir /&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2&gt;比较本地当前目录和云盘（程序的）根目录（这个很有用）：##&lt;/h2&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;bypy.py compare</span></code></pre></td></tr></table></div></figure></p>
+
+<p>上传下，看一下我的百度云，有了！</p>
+
+<p><img src="/images/baiduyun/4.jpg"></p>
+
+<p>下载：</p>
+
+<p><img src="/images/baiduyun/5.jpg"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Pi 3 Wifi问题]]></title>
+    <link href="http://starsight.github.io/blog/2016/04/21/raspberry-wifi-problems/"/>
+    <updated>2016-04-21T19:59:09+08:00</updated>
+    <id>http://starsight.github.io/blog/2016/04/21/raspberry-wifi-problems</id>
+    <content type="html"><![CDATA[<p>树莓派自带wifi模块，应该说是很实用的功能，用法其实和USB wifi一样使用，但是树莓派3死活连接不上我的wifi，于是我就参照USB wifi的使用。</p>
+
+<!--more-->
+
+
+<p>先用SSH登陆：</p>
+
+<p><img src="/images/wifi/1.jpg"></p>
+
+<p><img src="/images/wifi/2.jpg"></p>
+
+<pre><code>sudo vi /etc/wpa_supplicant/wpa_supplicant.conf
+</code></pre>
+
+<p>由于回宿舍，没有显示器，所以需要直接修改此文件：
+<code>
+network={
+        ssid="ssid"
+        psk="password"
+        key_mgmt=WPA-PSK
+}
+</code></p>
+
+<p>按照道理说，直接点图形界面的wifi连接，输入密码就可以了，然而我的死活就是不行</p>
+
+<p>尝试加入一些配置选项：
+<code>
+proto=WAP2
+pairwise=TKIP
+group=TKIP
+</code>
+依旧不行</p>
+
+<p>于是我就换一种方法就行修改：
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo vim /etc/network/interfaces&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;auto wlan0
+</span><span class='line'>iface wlan0 inet dhcp
+</span><span class='line'>    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf</span></code></pre></td></tr></table></div></figure>
+依旧不行。。</p>
+
+<p>后来</p>
+
+<p>……</p>
+
+<p>……</p>
+
+<p>……</p>
+
+<p>……</p>
+
+<p>（这是个悲伤的故事）</p>
+
+<p>发现路由器是斐讯的，网上有人说不支持、、不支持。。。</p>
+
+<p>于是我试了下我手机开的热点，直接在图形化界面就连上了……</p>
+
+<p>折腾了一天，好了，wifi算是可以用了（悲伤好大）</p>
+
+<p>总结：wifi好不好用看路由器，TP的可以，腾达的也行，同时最好使用最新的3-18的镜像，之前版本可以有问题。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Pi 3 开箱+扩容+samba]]></title>
+    <link href="http://starsight.github.io/blog/2016/04/20/raspberry-dilatation-and-samba/"/>
+    <updated>2016-04-20T20:33:34+08:00</updated>
+    <id>http://starsight.github.io/blog/2016/04/20/raspberry-dilatation-and-samba</id>
+    <content type="html"><![CDATA[<p>昨儿树莓3到手，今天先用了下电阻屏，帖子在此 ，花了些时间，今晚重点吧树莓基础环境先搭建下。<!--more-->
+开箱图：
+Pi3和微雪的屏</p>
+
+<p><img src="/images/samba/1.jpg"></p>
+
+<p><img src="/images/samba/2.jpg"></p>
+
+<p>说明书多国语言：</p>
+
+<p><img src="/images/samba/3.jpg"></p>
+
+<p>正面照：</p>
+
+<p><img src="/images/samba/4.jpg"></p>
+
+<p>背面：</p>
+
+<p><img src="/images/samba/5.jpg"></p>
+
+<p>这个3的卡槽由以前的弹出式变成现在直插的，安装时候没有弹簧按压声。</p>
+
+<p>安装很简单，去 <a href="http://downloads.raspberrypi.org/raspbian_latest">http://downloads.raspberrypi.org/raspbian_latest</a> 下载最新镜像即可，用Win32DiskImager 软件写入TF卡。</p>
+
+<p>到显示器上显示：</p>
+
+<p><img src="/images/samba/6.jpg"></p>
+
+<p>接下来扩展下TF卡:
+树莓派有傻瓜式方法：
+<code>
+sudo raspi-config
+</code></p>
+
+<p>直接修改下重启就0k了~
+如果想自己弄可以看这篇帖子：
+<a href="http://bbs.hqchip.com/group-topic-id-35428.html">http://bbs.hqchip.com/group-topic-id-35428.html</a></p>
+
+<p>扩张后如下：</p>
+
+<p><img src="/images/samba/7.jpg"></p>
+
+<p>安装samba的话和Nanopi什么的大同小异</p>
+
+<pre><code>sudo apt-get install samba
+sudo vi /etc/samba/smb.conf
+
+[global]
+        guest ok = yes
+        security =share
+[wj]
+        comment = User
+        path = /home/pi
+        create mask = 0777
+        directory mask = 0777
+        guest ok = yes
+        browseable = yes
+
+sudo smbd restart
+</code></pre>
+
+<p>修改下权限：
+<code>
+chmod -R go+rwx /home/pi
+</code>
+然后查看下ip，就可以在电脑上连接啦~</p>
+
+<p><img src="/images/samba/8.jpg"></p>
+]]></content>
+  </entry>
+  
+</feed>

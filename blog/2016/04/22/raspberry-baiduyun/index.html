@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Raspberry Pi 3 中文显示及输入+百度云传输 - Starsight</title>
+  <meta name="author" content="wenjie">
+
+  
+  <meta name="description" content="树莓派系统显示中文的话，大部分都是一个的小方块，还好我们有非常无私的开源者： 1
+sudo apt-get install ttf-wqy-zenhei 文泉驿的开源中文字体，树莓派全网唯一的开源中文字体库 能显示中文，输入也是必不可少的： 1
+sudo apt-get install scim- &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://starsight.github.io/blog/2016/04/22/raspberry-baiduyun">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Starsight" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Starsight</a></h1>
+  
+    <h2>不要让时代的悲剧成为你个人的悲剧</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="starsight.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Raspberry Pi 3 中文显示及输入+百度云传输</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-04-22T21:07:14+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2016</span></span> <span class='time'>9:07 pm</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://starsight.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>树莓派系统显示中文的话，大部分都是一个的小方块，还好我们有非常无私的开源者：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install ttf-wqy-zenhei</span></code></pre></td></tr></table></div></figure>
+
+
+<p>文泉驿的开源中文字体，树莓派全网唯一的开源中文字体库</p>
+
+<p>能显示中文，输入也是必不可少的：<!--more--></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install scim-pinyin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>快捷键也是Ctrl+空格</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo raspi-config</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/baiduyun/1.jpg"></p>
+
+<p>然后选择第五项Internationalisation Options，change_locale，在Default locale for the system environment:中选择zh_CN.UTF-8</p>
+
+<p>重启就可以生效啦~</p>
+
+<p>下面装神器：百度云~</p>
+
+<p><a href="https://github.com/houtianze/bypy">https://github.com/houtianze/bypy</a>
+这是地址，把它下载到树莓派上，解压。</p>
+
+<p>我的树莓派好多python库都装了，所以直接：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./bypy.py info</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在浏览器中粘贴那个网址，再输入你的百度账号，
+会得到一串授权码。</p>
+
+<p><img src="/images/baiduyun/2.jpg"></p>
+
+<p>粘贴到刚才的终端上：</p>
+
+<p><img src="/images/baiduyun/3.jpg"></p>
+
+<p>好了，至此就搞定了~</p>
+
+<p>下面测试下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>显示使用帮助和所有命令（英文）: 
+</span><span class='line'>bypy.py 
+</span><span class='line'>
+</span><span class='line'>更详细的了解某一个命令： 
+</span><span class='line'>bypy.py help &lt;command&gt; 
+</span><span class='line'>
+</span><span class='line'>显示在云盘（程序的）根目录下文件列表： 
+</span><span class='line'>bypy.py list 
+</span><span class='line'>
+</span><span class='line'>把当前目录同步到云盘： 
+</span><span class='line'>bypy.py syncup 
+</span><span class='line'>or 
+</span><span class='line'>bypy.py upload 
+</span><span class='line'>
+</span><span class='line'>把云盘内容同步到本地来： 
+</span><span class='line'>bypy.py syncdown 
+</span><span class='line'>or 
+</span><span class='line'>bypy.py downdir / 
+</span><span class='line'>
+</span><span class='line'>## 比较本地当前目录和云盘（程序的）根目录（这个很有用）：## 
+</span><span class='line'>bypy.py compare</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上传下，看一下我的百度云，有了！</p>
+
+<p><img src="/images/baiduyun/4.jpg"></p>
+
+<p>下载：</p>
+
+<p><img src="/images/baiduyun/5.jpg"></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">wenjie</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-04-22T21:07:14+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2016</span></span> <span class='time'>9:07 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/2016-04/'>2016-04</a>, <a class='category' href='/blog/categories/shu-mei-pai/'>树莓派</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/04/21/raspberry-wifi-problems/" title="Previous Post: Raspberry Pi 3 wifi问题">&laquo; Raspberry Pi 3 wifi问题</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2016/04/23/raspberry-dnsmasq/" title="Next Post: Raspberry Pi 3 搭建本地DNS服务器">Raspberry Pi 3 搭建本地DNS服务器 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section> 
+  <h1>文章分类</h1> 
+  <ul id="categories"> 
+    <li class='category'><a href='/blog/categories/2015-01/'>2015-01 (4)</a></li>
+<li class='category'><a href='/blog/categories/2015-02/'>2015-02 (1)</a></li>
+<li class='category'><a href='/blog/categories/2015-03/'>2015-03 (1)</a></li>
+<li class='category'><a href='/blog/categories/2015-04/'>2015-04 (1)</a></li>
+<li class='category'><a href='/blog/categories/2015-07/'>2015-07 (1)</a></li>
+<li class='category'><a href='/blog/categories/2015-11/'>2015-11 (2)</a></li>
+<li class='category'><a href='/blog/categories/2016-04/'>2016-04 (5)</a></li>
+<li class='category'><a href='/blog/categories/shu-mei-pai/'>树莓派 (5)</a></li>
+ 
+  </ul> 
+</section><section>
+  <h1>最近文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/04/24/raspberry-weibo/">Raspberry Pi 3 发微博</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/23/raspberry-dnsmasq/">Raspberry Pi 3 搭建本地DNS服务器</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/22/raspberry-baiduyun/">Raspberry Pi 3 中文显示及输入+百度云传输</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/21/raspberry-wifi-problems/">Raspberry Pi 3 Wifi问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/20/raspberry-dilatation-and-samba/">Raspberry Pi 3 开箱+扩容+samba</a>
+      </li>
+    
+  </ul>
+</section>
+
+﻿
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - wenjie -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e4b4e5c7c09b80a0ea7080386026279a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'hewenjie';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://starsight.github.io/blog/2016/04/22/raspberry-baiduyun/';
+        var disqus_url = 'http://starsight.github.io/blog/2016/04/22/raspberry-baiduyun/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

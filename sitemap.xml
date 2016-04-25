@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://starsight.github.io/blog/2016/04/24/raspberry-weibo/</loc>
+    <lastmod>2016-04-24T21:57:51+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://starsight.github.io/blog/2016/04/23/raspberry-dnsmasq/</loc>
+    <lastmod>2016-04-23T21:39:04+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://starsight.github.io/blog/2016/04/22/raspberry-baiduyun/</loc>
+    <lastmod>2016-04-22T21:07:14+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://starsight.github.io/blog/2016/04/21/raspberry-wifi-problems/</loc>
+    <lastmod>2016-04-21T19:59:09+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://starsight.github.io/blog/2016/04/20/raspberry-dilatation-and-samba/</loc>
+    <lastmod>2016-04-20T20:33:34+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>http://starsight.github.io/blog/2015/11/27/wechat-article-1/</loc>
     <lastmod>2015-11-27T18:47:16+08:00</lastmod>
     <priority>0.8</priority>
@@ -52,13 +77,13 @@
   </url>
   <url>
     <loc>http://starsight.github.io/blog/archives/</loc>
-    <lastmod>2015-11-27T18:49:47+08:00</lastmod>
+    <lastmod>2016-04-25T13:57:05+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>http://starsight.github.io/</loc>
-    <lastmod>2015-11-27T18:49:47+08:00</lastmod>
+    <lastmod>2016-04-25T13:57:05+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
