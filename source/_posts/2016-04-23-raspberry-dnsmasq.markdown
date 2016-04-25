@@ -74,3 +74,8 @@ sudo apt-get install dnsutils
 
 还有no-hosts 选项 ，默认情况下这是注释掉的, dnsmasq 会首先寻找本地的 /etc/hosts 文件，再去寻找缓存下来的域名, 最后去上游 dns 服务器寻找。所以/etc/hosts才是dnsmasq第一个寻找的地方。
 
+参考:  
+[http://www.tuicool.com/articles/bUn2Uz](http://www.tuicool.com/articles/bUn2Uz)  
+[http://skypegnu1.blog.51cto.com/8991766/1641149](http://skypegnu1.blog.51cto.com/8991766/1641149)  
+[http://www.xiaobaidonghui.cn/?p=400#more-400](http://www.xiaobaidonghui.cn/?p=400#more-400)  
+[http://www.freehao123.com/dnsmasq/](http://www.freehao123.com/dnsmasq/)  
