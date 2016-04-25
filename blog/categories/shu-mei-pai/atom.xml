@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 树莓派 | Starsight]]></title>
   <link href="http://starsight.github.io/blog/categories/shu-mei-pai/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-04-25T14:15:42+08:00</updated>
+  <updated>2016-04-25T15:01:32+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -179,6 +179,12 @@ sudo apt-get install dnsutils
 </code></p>
 
 <p>还有no-hosts 选项 ，默认情况下这是注释掉的, dnsmasq 会首先寻找本地的 /etc/hosts 文件，再去寻找缓存下来的域名, 最后去上游 dns 服务器寻找。所以/etc/hosts才是dnsmasq第一个寻找的地方。</p>
+
+<p>参考：<br/>
+<a href="http://www.tuicool.com/articles/bUn2Uz">http://www.tuicool.com/articles/bUn2Uz</a><br/>
+<a href="http://skypegnu1.blog.51cto.com/8991766/1641149">http://skypegnu1.blog.51cto.com/8991766/1641149</a><br/>
+<a href="http://www.xiaobaidonghui.cn/?p=400#more-400">http://www.xiaobaidonghui.cn/?p=400#more-400</a><br/>
+<a href="http://www.freehao123.com/dnsmasq/">http://www.freehao123.com/dnsmasq/</a></p>
 ]]></content>
   </entry>
   
