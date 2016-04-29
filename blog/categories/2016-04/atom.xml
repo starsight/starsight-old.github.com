@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 2016-04 | Starsight]]></title>
   <link href="http://starsight.github.io/blog/categories/2016-04/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-04-29T12:46:46+08:00</updated>
+  <updated>2016-04-29T12:50:08+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -91,7 +91,7 @@ sudo vi /etc/apache2/apache2.conf
 
 <p>这是局域网的访问，如果没公网ip，则可用ngrok内网转发来实现外网访问。</p>
 
-<p>参考：<br/>
+<p>参考:<br/>
 <a href="https://alexlee.cn/%e6%a0%91%e8%8e%93%e6%b4%beraspberry-pi%e5%ae%89%e8%a3%85owncloud%e6%90%ad%e5%bb%ba%e7%a7%81%e6%9c%89%e4%ba%91%e6%9c%8d%e5%8a%a1%e5%99%a8/">树莓派Raspberry Pi安装ownCloud搭建私有云服务器</a><br/>
 <a href="http://www.linuxidc.com/Linux/2013-08/89380.htm">Ubuntu 12.04下使用ownCloud搭建私人存储云</a><br/>
 <a href="http://www.linuxidc.com/Linux/2014-03/98757.htm">CentOS 6.3搭建个人私有云存储ownCloud</a></p>
