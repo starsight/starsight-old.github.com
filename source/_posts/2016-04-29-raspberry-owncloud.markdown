@@ -13,11 +13,11 @@ categories: 2016-04 树莓派
 
 ownCloud 内核是用PHP5写的，支持SQLite、MySQL、Oracle以及PostgreSQL等数据库。为了简单，我们将用MySQL数据库。在你的Linux系统下你需要安装以下软件：
 
-PHP 安装包：php5, php5-gd, php-xml- parser,php5-intl
-数据库驱动：php5-mysql（如果你使用其他数据库，需要安装相应的数据库以及驱动）
-Curl 安装包：curl, libcurl3, php5-curl
-SMB 客户端：smbclient （这个用来挂载Windows共享文件夹的）
-Web 服务器：apache2
+PHP 安装包：php5, php5-gd, php-xml- parser,php5-intl  
+数据库驱动：php5-mysql（如果你使用其他数据库，需要安装相应的数据库以及驱动）  
+Curl 安装包：curl, libcurl3, php5-curl  
+SMB 客户端：smbclient （这个用来挂载Windows共享文件夹的）  
+Web 服务器：apache2  
 
 ####一键安装：
 ```
@@ -26,7 +26,7 @@ sudo apt-get install apache2 php5 php5-gd php-xml-parser php5-intl php5-sqlite p
 
 从 https://owncloud.org/install/ 下载最新的ownCloud Server 对于本文，我们使用owncloud-9.0.1 版本
 
-{% img /images/ownclund/1.jpg%}
+{% img /images/owncloud/1.jpg%}
 
 对于基于Debian发行版的Linux系统，web服务器的根目录为/var/www  我实际操作过程中似乎不可用，于是我就放在了html文件夹下。
 
@@ -63,17 +63,17 @@ sudo vi /etc/apache2/apache2.conf
 
 打开浏览器，输入http://IP/owncloud 
 
-{% img /images/ownclund/2.jpg%}
+{% img /images/owncloud/2.jpg%}
 
 电脑上装一下owncloud的客户端，然后操作比较简单
 
 看我的同步效果：
 
-{% img /images/ownclund/3.jpg%}
+{% img /images/owncloud/3.jpg%}
 
-{% img /images/ownclund/4.jpg%}
+{% img /images/owncloud/4.jpg%}
 
-{% img /images/ownclund/5.jpg%}
+{% img /images/owncloud/5.jpg%}
 
-这是局域网的访问，如果没公网ip，则可用ngrok内网转发实现。
+这是局域网的访问，如果没公网ip，则可用ngrok内网转发来实现外网访问。
 
