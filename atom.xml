@@ -4,7 +4,7 @@
   <title><![CDATA[Starsight]]></title>
   <link href="http://starsight.github.io/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-04-29T14:35:24+08:00</updated>
+  <updated>2016-04-29T14:43:33+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -116,7 +116,7 @@ Web 服务器：apache2</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Raspberry Pi 3 Ngrok使用]]></title>
+    <title type="html"><![CDATA[Raspberry Pi 3 Ngrok内网穿透]]></title>
     <link href="http://starsight.github.io/blog/2016/04/28/raspberry-ngrok/"/>
     <updated>2016-04-28T13:48:51+08:00</updated>
     <id>http://starsight.github.io/blog/2016/04/28/raspberry-ngrok</id>
@@ -173,7 +173,7 @@ ngrok 就可以实现外网访问树莓派，ngrok的具体介绍和实现就不
 则修改下config.php</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vi var/www/owncloud/config/config.php</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo vi /var/www/html/owncloud/config/config.php</span></code></pre></td></tr></table></div></figure>
 
 
 <p></p>
