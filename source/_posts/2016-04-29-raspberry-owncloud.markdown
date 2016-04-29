@@ -78,7 +78,8 @@ sudo vi /etc/apache2/apache2.conf
 这是局域网的访问，如果没公网ip，则可用ngrok内网转发来实现外网访问。
 
 
-参考：  
+参考:  
+[使用OwnCloud创建私有云](http://jjliu.blog.ustc.edu.cn/198/)  
 [树莓派Raspberry Pi安装ownCloud搭建私有云服务器](https://alexlee.cn/%e6%a0%91%e8%8e%93%e6%b4%beraspberry-pi%e5%ae%89%e8%a3%85owncloud%e6%90%ad%e5%bb%ba%e7%a7%81%e6%9c%89%e4%ba%91%e6%9c%8d%e5%8a%a1%e5%99%a8/)  
 [Ubuntu 12.04下使用ownCloud搭建私人存储云](http://www.linuxidc.com/Linux/2013-08/89380.htm)  
 [CentOS 6.3搭建个人私有云存储ownCloud](http://www.linuxidc.com/Linux/2014-03/98757.htm)  
