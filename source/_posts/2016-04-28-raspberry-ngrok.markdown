@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Raspberry Pi 3 ngrok使用"
+title: "Raspberry Pi 3 ngrok内网穿透"
 date: 2016-04-28 13:48:51 +0800
 comments: true
 categories: 2016-04 树莓派
@@ -56,7 +56,7 @@ test.wenjiehe.com/owncloud
 可能遇到 ####正在访问来自不信任域名的服务器,请联系你的系统管理员。如果你是系统管理员，配置config/config.php文件中参数"trusted_domain"
 则修改下config.php
 ```
-vi var/www/owncloud/config/config.php
+sudo vi /var/www/html/owncloud/config/config.php
 ```  
 
 {% img /images/ngrok/8.jpg%}
