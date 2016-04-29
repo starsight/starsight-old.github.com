@@ -41,7 +41,7 @@ Web 服务器：apache2</p>
 
 <p>从 <a href="https://owncloud.org/install/">https://owncloud.org/install/</a> 下载最新的ownCloud Server 对于本文，我们使用owncloud-9.0.1 版本</p>
 
-<p>{% img /images/owncloud/1.jpg%}</p>
+<p><img src="/images/owncloud/1.jpg"></p>
 
 <p>对于基于Debian发行版的Linux系统，web服务器的根目录为/var/www  我实际操作过程中似乎不可用，于是我就放在了html文件夹下。</p>
 
@@ -77,17 +77,17 @@ sudo vi /etc/apache2/apache2.conf
 
 <p>打开浏览器，输入<a href="http://IP/owncloud">http://IP/owncloud</a></p>
 
-<p>{% img /images/owncloud/2.jpg%}</p>
+<p><img src="/images/owncloud/2.jpg"></p>
 
 <p>电脑上装一下owncloud的客户端，然后操作比较简单</p>
 
 <p>看我的同步效果：</p>
 
-<p>{% img /images/owncloud/3.jpg%}</p>
+<p><img src="/images/owncloud/3.jpg"></p>
 
-<p>{% img /images/owncloud/4.jpg%}</p>
+<p><img src="/images/owncloud/4.jpg"></p>
 
-<p>{% img /images/owncloud/5.jpg%}</p>
+<p><img src="/images/owncloud/5.jpg"></p>
 
 <p>这是局域网的访问，如果没公网ip，则可用ngrok内网转发来实现外网访问。</p>
 
@@ -110,7 +110,7 @@ sudo vi /etc/apache2/apache2.conf
 <!--more-->
 
 
-<p>{% img /images/weibo/1.jpg%}</p>
+<p><img src="/images/weibo/1.jpg"></p>
 
 <pre><code>#coding=utf-8
 
@@ -169,25 +169,25 @@ if __name__ == "__main__":
 
 <p>运行之后会让你登录：</p>
 
-<p>{% img /images/weibo/2.jpg%}</p>
+<p><img src="/images/weibo/2.jpg"></p>
 
 <p>我们复制控制台显示出来的链接，粘贴到浏览器去获得code：</p>
 
-<p>{% img /images/weibo/3.jpg%}</p>
+<p><img src="/images/weibo/3.jpg"></p>
 
 <p>如果第一次登微博，就需要输一下帐号，密码，我的之前已经登陆过了。</p>
 
 <p>看地址栏最后有一串字符：</p>
 
-<p>{% img /images/weibo/4.jpg%}</p>
+<p><img src="/images/weibo/4.jpg"></p>
 
 <p>然后会问你要不要发微博，我们来发一条：</p>
 
-<p>{% img /images/weibo/5.jpg%}</p>
+<p><img src="/images/weibo/5.jpg"></p>
 
 <p>去微博看一看：</p>
 
-<p>{% img /images/weibo/6.jpg%}</p>
+<p><img src="/images/weibo/6.jpg"></p>
 
 <p>在之前，微博api是可以自己获得code，不需要手动到浏览器去粘贴获得，但是现在好像不可以了（但是还是有途径的），下一次再试试能不能自动登录。</p>
 ]]></content>
@@ -246,11 +246,11 @@ sudo service dnsmasq restart
 
 <p>将Dnsmasq作为本地DNS服务器使用，直接修改电脑的本地DNS的IP地址即可。</p>
 
-<p>{% img /images/dns/1.jpg%}</p>
+<p><img src="/images/dns/1.jpg"></p>
 
 <p>ping 一下试试</p>
 
-<p>{% img /images/dns/2.jpg%}</p>
+<p><img src="/images/dns/2.jpg"></p>
 
 <p>大功告成。</p>
 
@@ -293,7 +293,7 @@ sudo apt-get install scim-pinyin
 sudo raspi-config
 </code></p>
 
-<p>{% img /images/baiduyun/1.jpg%}</p>
+<p><img src="/images/baiduyun/1.jpg"></p>
 
 <p>然后选择第五项Internationalisation Options，change_locale，在Default locale for the system environment:中选择zh_CN.UTF-8</p>
 
@@ -312,47 +312,67 @@ sudo raspi-config
 <p>在浏览器中粘贴那个网址，再输入你的百度账号，
 会得到一串授权码。</p>
 
-<p>{% img /images/baiduyun/2.jpg%}</p>
+<p><img src="/images/baiduyun/2.jpg"></p>
 
 <p>粘贴到刚才的终端上：</p>
 
-<p>{% img /images/baiduyun/3.jpg%}</p>
+<p><img src="/images/baiduyun/3.jpg"></p>
 
 <p>好了，至此就搞定了~</p>
 
 <p>下面测试下：
-&#8220;`
-显示使用帮助和所有命令（英文）:
-bypy.py</p>
-
-<p>更详细的了解某一个命令：
-bypy.py help <command></p>
-
-<p>显示在云盘（程序的）根目录下文件列表：
-bypy.py list</p>
-
-<p>把当前目录同步到云盘：
-bypy.py syncup
-or
-bypy.py upload</p>
-
-<p>把云盘内容同步到本地来：
-bypy.py syncdown
-or
-bypy.py downdir /</p>
-
-<h2>比较本地当前目录和云盘（程序的）根目录（这个很有用）：##</h2>
-
-<p>bypy.py compare
-&#8220;`</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>显示使用帮助和所有命令（英文）:
+</span><span class='line'>bypy.py&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;更详细的了解某一个命令：
+</span><span class='line'>bypy.py help &lt;command&gt;&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;显示在云盘（程序的）根目录下文件列表：
+</span><span class='line'>bypy.py list&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;把当前目录同步到云盘：
+</span><span class='line'>bypy.py syncup
+</span><span class='line'>or
+</span><span class='line'>bypy.py upload&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;把云盘内容同步到本地来：
+</span><span class='line'>bypy.py syncdown
+</span><span class='line'>or
+</span><span class='line'>bypy.py downdir /&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2&gt;比较本地当前目录和云盘（程序的）根目录（这个很有用）：##&lt;/h2&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;bypy.py compare</span></code></pre></td></tr></table></div></figure></p>
 
 <p>上传下，看一下我的百度云，有了！</p>
 
-<p>{% img /images/baiduyun/4.jpg%}</p>
+<p><img src="/images/baiduyun/4.jpg"></p>
 
 <p>下载：</p>
 
-<p>{% img /images/baiduyun/5.jpg%}</p>
+<p><img src="/images/baiduyun/5.jpg"></p>
 ]]></content>
   </entry>
   
@@ -368,9 +388,9 @@ bypy.py downdir /</p>
 
 <p>先用SSH登陆：</p>
 
-<p>{% img /images/wifi/1.jpg%}</p>
+<p><img src="/images/wifi/1.jpg"></p>
 
-<p>{% img /images/wifi/2.jpg%}</p>
+<p><img src="/images/wifi/2.jpg"></p>
 
 <pre><code>sudo vi /etc/wpa_supplicant/wpa_supplicant.conf
 </code></pre>
@@ -395,13 +415,16 @@ group=TKIP
 依旧不行</p>
 
 <p>于是我就换一种方法就行修改：
-&#8220;`
-sudo vim /etc/network/interfaces</p>
-
-<p>auto wlan0
-iface wlan0 inet dhcp
-    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
-&#8220;`
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo vim /etc/network/interfaces&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;auto wlan0
+</span><span class='line'>iface wlan0 inet dhcp
+</span><span class='line'>    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf</span></code></pre></td></tr></table></div></figure>
 依旧不行。。</p>
 
 <p>后来</p>
