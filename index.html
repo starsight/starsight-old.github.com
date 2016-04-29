@@ -110,6 +110,109 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2016/04/28/raspberry-ngrok/">Raspberry Pi 3 Ngrok使用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-04-28T13:48:51+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:48 pm</span></time>
+        
+           | <a href="/blog/2016/04/28/raspberry-ngrok/#disqus_thread"
+             data-disqus-identifier="http://starsight.github.io/blog/2016/04/28/raspberry-ngrok/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>现在很多宽带服务都不分公网ip，那怎么让外网访问树莓派的服务呢？
+ngrok 就可以实现外网访问树莓派，ngrok的具体介绍和实现就不说了，主要来看看怎么使用。</p>
+
+<p>我用的是国内的ngrok.cc 的服务。</p>
+
+<p>去ngrok.cc 下载arm版本的客户端，解压。
+修改 ngrok.cfg 文件</p>
+
+<p>这里的token填写在 <a href="http://www.ngrok.cc/index.php/Member/index.html">Ngrok管理中心</a> 的token</p>
+
+<p><img src="/images/ngrok/1.jpg"></p>
+
+<p>我们需要在域名列表里面注册一下：</p>
+
+<p><img src="/images/ngrok/2.jpg"></p>
+
+<p>我这里用的是自己的域名，还需要在dns解析 加一条记录</p>
+
+<p><img src="/images/ngrok/3.jpg"></p>
+
+<p>不运行服务，直接输入域名，应该可以看到如下文字：</p>
+
+<p><img src="/images/ngrok/4.jpg"></p>
+
+<p>说明这部分没有问题了~</p>
+
+<p>接下来启动服务：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> ./ngrok -config ngrok.cfg start test</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样表示运行成功：</p>
+
+<p><img src="/images/ngrok/5.jpg"></p>
+
+<p>打开浏览器，刷新一下刚才的界面：</p>
+
+<p><img src="/images/ngrok/6.jpg"></p>
+
+<p>我们把上一次的owncloud也给加上</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>test.wenjiehe.com/owncloud</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/ngrok/7.jpg"><br/>
+可以照常使用~~</p>
+
+<p>可能遇到 ####正在访问来自不信任域名的服务器,请联系你的系统管理员。如果你是系统管理员，配置config/config.php文件中参数&#8221;trusted_domain&#8221;
+则修改下config.php</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vi var/www/owncloud/config/config.php</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p><img src="/images/ngrok/8.jpg"></p>
+
+<p>同时再提供下android版本的登录成功的截图：</p>
+
+<p><img src="/images/ngrok/9.jpg"></p>
+
+<p><img src="/images/ngrok/10.jpg"></p>
+
+<p>如果没有自己的域名也可以使用ngrok.cc提供的二级域名。</p>
+
+<p>参考:<br/>
+<a href="http://ngrok.cc/">Sunny-Ngrok内网转发</a><br/>
+<a href="https://www.chiphell.com/thread-1534193-1-1.html">&ldquo;正在访问来自不信任域名的服务器&#8221;的解决办法</a><br/>
+<a href="https://www.zhihu.com/question/42433730">如何让树莓派可以被外网访问？</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2016/04/24/raspberry-weibo/">Raspberry Pi 3 发微博</a></h1>
     
     
@@ -399,43 +502,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/30/i-am-always-busy/">大学，为什么我一直这么忙？</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-30T13:13:20+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:13 pm</span></time>
-        
-           | <a href="/blog/2015/04/30/i-am-always-busy/#disqus_thread"
-             data-disqus-identifier="http://starsight.github.io/blog/2015/04/30/i-am-always-busy/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>感觉我的大学一直处于忙碌，忙着上课，学习各种东西。我都一直在做什么呢？</p>
-
-<p>大一的时候都比较认真，不光是学习上，对很多未知的事情都保持敬畏、探索的心。大一上老老实实学习着，没加入什么社团、组织，感觉比别人差了好多（无事恐惧症？），大一下虽然课程比较重，概念比较多，对于我这种上课上课就走神的人来说简直就是噩梦</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/04/30/i-am-always-busy/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -455,8 +521,8 @@
 <li class='category'><a href='/blog/categories/2015-04/'>2015-04 (1)</a></li>
 <li class='category'><a href='/blog/categories/2015-07/'>2015-07 (1)</a></li>
 <li class='category'><a href='/blog/categories/2015-11/'>2015-11 (2)</a></li>
-<li class='category'><a href='/blog/categories/2016-04/'>2016-04 (6)</a></li>
-<li class='category'><a href='/blog/categories/shu-mei-pai/'>树莓派 (6)</a></li>
+<li class='category'><a href='/blog/categories/2016-04/'>2016-04 (7)</a></li>
+<li class='category'><a href='/blog/categories/shu-mei-pai/'>树莓派 (7)</a></li>
  
   </ul> 
 </section><section>
@@ -465,6 +531,10 @@
     
       <li class="post">
         <a href="/blog/2016/04/29/raspberry-owncloud/">Raspberry Pi 3 使用owncloud云服务</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/28/raspberry-ngrok/">Raspberry Pi 3 Ngrok使用</a>
       </li>
     
       <li class="post">
@@ -477,10 +547,6 @@
     
       <li class="post">
         <a href="/blog/2016/04/22/raspberry-baiduyun/">Raspberry Pi 3 中文显示及输入+百度云传输</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/04/21/raspberry-wifi-problems/">Raspberry Pi 3 Wifi问题</a>
       </li>
     
   </ul>
