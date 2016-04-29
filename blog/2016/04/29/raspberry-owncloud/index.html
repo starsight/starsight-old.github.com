@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Raspberry Pi 3 中文显示及输入+百度云传输 - Starsight</title>
+  <title>Raspberry Pi 3 使用owncloud云服务 - Starsight</title>
   <meta name="author" content="wenjie">
 
   
-  <meta name="description" content="树莓派系统显示中文的话，大部分都是一个的小方块，还好我们有非常无私的开源者： 1
-sudo apt-get install ttf-wqy-zenhei 文泉驿的开源中文字体，树莓派全网唯一的开源中文字体库 能显示中文，输入也是必不可少的： 1
-sudo apt-get install scim- &hellip;">
+  <meta name="description" content="我们将要搭建自己的云系统平台，更精确的说是一个云存储系统，正如上面的产品所提供的功能。我们将使用开源软件ownCloud来搭建自己的私有云。ownCloud 起源于一个叫The KDE 云计算项目，现在已经适用于大多主流平台，它最早是KED的开发者Frank Karlitschek 创建的， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ sudo apt-get install scim- &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://starsight.github.io/blog/2016/04/22/raspberry-baiduyun">
+  <link rel="canonical" href="http://starsight.github.io/blog/2016/04/29/raspberry-owncloud">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Starsight" type="application/atom+xml">
@@ -69,7 +67,7 @@ sudo apt-get install scim- &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Raspberry Pi 3 中文显示及输入+百度云传输</h1>
+      <h1 class="entry-title">Raspberry Pi 3 使用owncloud云服务</h1>
     
     
       <p class="meta">
@@ -78,7 +76,7 @@ sudo apt-get install scim- &hellip;">
 
 
 
-<time class='entry-date' datetime='2016-04-22T21:07:14+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2016</span></span> <span class='time'>9:07 pm</span></time>
+<time class='entry-date' datetime='2016-04-29T10:48:51+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:48 am</span></time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://starsight.github.io">Comments</a>
@@ -88,107 +86,94 @@ sudo apt-get install scim- &hellip;">
   </header>
 
 
-<div class="entry-content"><p>树莓派系统显示中文的话，大部分都是一个的小方块，还好我们有非常无私的开源者：</p>
+<div class="entry-content"><p>我们将要搭建自己的云系统平台，更精确的说是一个云存储系统，正如上面的产品所提供的功能。我们将使用开源软件ownCloud来搭建自己的私有云。ownCloud 起源于一个叫The KDE 云计算项目，现在已经适用于大多主流平台，它最早是KED的开发者Frank Karlitschek 创建的，现在由一个ownCloud team共同开发。</p>
+
+<p>首先介绍一下ownCloud：
+简单来说就是一个基于PHP的自建网盘。基本上是私人使用，没有用户注册功能，但是有用户添加功能，你可以无限制地添加用户，OwnCloud还提供了不少的免费应用，这些应用可以让你更好观看视频、倾听音乐等。</p>
+
+<!--more-->
+
+
+<p>ownCloud 内核是用PHP5写的，支持SQLite、MySQL、Oracle以及PostgreSQL等数据库。为了简单，我们将用MySQL数据库。在你的Linux系统下你需要安装以下软件：</p>
+
+<p>PHP 安装包：php5, php5-gd, php-xml- parser,php5-intl
+数据库驱动：php5-mysql（如果你使用其他数据库，需要安装相应的数据库以及驱动）
+Curl 安装包：curl, libcurl3, php5-curl
+SMB 客户端：smbclient （这个用来挂载Windows共享文件夹的）
+Web 服务器：apache2</p>
+
+<h4>一键安装：</h4>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install ttf-wqy-zenhei</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install apache2 php5 php5-gd php-xml-parser php5-intl php5-sqlite php5-mysql smbclient curl libcurl3 php5-curl mysql-server</span></code></pre></td></tr></table></div></figure>
 
 
-<p>文泉驿的开源中文字体，树莓派全网唯一的开源中文字体库</p>
+<p>从 <a href="https://owncloud.org/install/">https://owncloud.org/install/</a> 下载最新的ownCloud Server 对于本文，我们使用owncloud-9.0.1 版本</p>
 
-<p>能显示中文，输入也是必不可少的：<!--more--></p>
+<p><img src="/images/ownclund/1.jpg"></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install scim-pinyin</span></code></pre></td></tr></table></div></figure>
-
-
-<p>快捷键也是Ctrl+空格</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo raspi-config</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/baiduyun/1.jpg"></p>
-
-<p>然后选择第五项Internationalisation Options，change_locale，在Default locale for the system environment:中选择zh_CN.UTF-8</p>
-
-<p>重启就可以生效啦~</p>
-
-<p>下面装神器：百度云~</p>
-
-<p><a href="https://github.com/houtianze/bypy">https://github.com/houtianze/bypy</a>
-这是地址，把它下载到树莓派上，解压。</p>
-
-<p>我的树莓派好多python库都装了，所以直接：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./bypy.py info</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在浏览器中粘贴那个网址，再输入你的百度账号，
-会得到一串授权码。</p>
-
-<p><img src="/images/baiduyun/2.jpg"></p>
-
-<p>粘贴到刚才的终端上：</p>
-
-<p><img src="/images/baiduyun/3.jpg"></p>
-
-<p>好了，至此就搞定了~</p>
-
-<p>下面测试下：</p>
+<p>对于基于Debian发行版的Linux系统，web服务器的根目录为/var/www  我实际操作过程中似乎不可用，于是我就放在了html文件夹下。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>显示使用帮助和所有命令（英文）: 
-</span><span class='line'>bypy.py 
-</span><span class='line'>
-</span><span class='line'>更详细的了解某一个命令： 
-</span><span class='line'>bypy.py help &lt;command&gt; 
-</span><span class='line'>
-</span><span class='line'>显示在云盘（程序的）根目录下文件列表： 
-</span><span class='line'>bypy.py list 
-</span><span class='line'>
-</span><span class='line'>把当前目录同步到云盘： 
-</span><span class='line'>bypy.py syncup 
-</span><span class='line'>or 
-</span><span class='line'>bypy.py upload 
-</span><span class='line'>
-</span><span class='line'>把云盘内容同步到本地来： 
-</span><span class='line'>bypy.py syncdown 
-</span><span class='line'>or 
-</span><span class='line'>bypy.py downdir / 
-</span><span class='line'>
-</span><span class='line'>## 比较本地当前目录和云盘（程序的）根目录（这个很有用）：## 
-</span><span class='line'>bypy.py compare</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd /var/www/html  #（网页目录）
+</span><span class='line'>tar jxf owncloud-9.0.1.tar.bz2 -C  /var/www/html   #(解压至web目录)
+</span><span class='line'>cd /var/www/html/owncloud  #（进入owncloud web目录）
+</span><span class='line'>mkdir data    #(建立数据库目录)
+</span><span class='line'>cd data</span></code></pre></td></tr></table></div></figure>
 
 
-<p>上传下，看一下我的百度云，有了！</p>
+<h4>OwnCloud在安装的过程中需要对一些目录有写的权限，为此，web服务器用户（www-data对于基于Debian的系统）必须要拥有apps、data、config目录的权限。运行以下命令完成：</h4>
 
-<p><img src="/images/baiduyun/4.jpg"></p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#data 目录下
+</span><span class='line'>sudo chown -R www-data:www-data data 
+</span><span class='line'>sudo chown -R www-data:www-data config 
+</span><span class='line'>sudo chown -R www-data:www-data apps</span></code></pre></td></tr></table></div></figure>
 
-<p>下载：</p>
 
-<p><img src="/images/baiduyun/5.jpg"></p>
+<p>还需要修改下配置文件：
+（网上说法不一,有说是 /etc/apache2/sites-enabled/000-default.conf ，还有说 /etc/httpd/conf.d/owncloud.conf 不过我没找到此文件）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo vi /etc/apache2/apache2.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>修改如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;Directory /var/www/&gt;
+</span><span class='line'>        Options Indexes FollowSymLinks
+</span><span class='line'>        AllowOverride All
+</span><span class='line'>        Require all granted
+</span><span class='line'>&lt;/Directory&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>打开浏览器，输入<a href="http://IP/owncloud">http://IP/owncloud</a></p>
+
+<p><img src="/images/ownclund/2.jpg"></p>
+
+<p>电脑上装一下owncloud的客户端，然后操作比较简单</p>
+
+<p>看我的同步效果：</p>
+
+<p><img src="/images/ownclund/3.jpg"></p>
+
+<p><img src="/images/ownclund/4.jpg"></p>
+
+<p><img src="/images/ownclund/5.jpg"></p>
+
+<p>这是局域网的访问，如果没公网ip，则可用ngrok内网转发实现。</p>
 </div>
 
 
@@ -204,7 +189,7 @@ sudo apt-get install scim- &hellip;">
 
 
 
-<time class='entry-date' datetime='2016-04-22T21:07:14+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2016</span></span> <span class='time'>9:07 pm</span></time>
+<time class='entry-date' datetime='2016-04-29T10:48:51+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:48 am</span></time>
       
 
 <span class="categories">
@@ -225,10 +210,8 @@ sudo apt-get install scim- &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/04/21/raspberry-wifi-problems/" title="Previous Post: Raspberry Pi 3 wifi问题">&laquo; Raspberry Pi 3 wifi问题</a>
+        <a class="basic-alignment left" href="/blog/2016/04/24/raspberry-weibo/" title="Previous Post: Raspberry Pi 3 发微博">&laquo; Raspberry Pi 3 发微博</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/04/23/raspberry-dnsmasq/" title="Next Post: Raspberry Pi 3 搭建本地DNS服务器">Raspberry Pi 3 搭建本地DNS服务器 &raquo;</a>
       
     </p>
   </footer>
@@ -317,8 +300,8 @@ var _hmt = _hmt || [];
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://starsight.github.io/blog/2016/04/22/raspberry-baiduyun/';
-        var disqus_url = 'http://starsight.github.io/blog/2016/04/22/raspberry-baiduyun/';
+        var disqus_identifier = 'http://starsight.github.io/blog/2016/04/29/raspberry-owncloud/';
+        var disqus_url = 'http://starsight.github.io/blog/2016/04/29/raspberry-owncloud/';
         var disqus_script = 'embed.js';
       
     (function () {

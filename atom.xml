@@ -4,7 +4,7 @@
   <title><![CDATA[Starsight]]></title>
   <link href="http://starsight.github.io/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-04-25T15:01:32+08:00</updated>
+  <updated>2016-04-29T12:28:29+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -12,6 +12,102 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Pi 3 使用owncloud云服务]]></title>
+    <link href="http://starsight.github.io/blog/2016/04/29/raspberry-owncloud/"/>
+    <updated>2016-04-29T10:48:51+08:00</updated>
+    <id>http://starsight.github.io/blog/2016/04/29/raspberry-owncloud</id>
+    <content type="html"><![CDATA[<p>我们将要搭建自己的云系统平台，更精确的说是一个云存储系统，正如上面的产品所提供的功能。我们将使用开源软件ownCloud来搭建自己的私有云。ownCloud 起源于一个叫The KDE 云计算项目，现在已经适用于大多主流平台，它最早是KED的开发者Frank Karlitschek 创建的，现在由一个ownCloud team共同开发。</p>
+
+<p>首先介绍一下ownCloud：
+简单来说就是一个基于PHP的自建网盘。基本上是私人使用，没有用户注册功能，但是有用户添加功能，你可以无限制地添加用户，OwnCloud还提供了不少的免费应用，这些应用可以让你更好观看视频、倾听音乐等。</p>
+
+<!--more-->
+
+
+<p>ownCloud 内核是用PHP5写的，支持SQLite、MySQL、Oracle以及PostgreSQL等数据库。为了简单，我们将用MySQL数据库。在你的Linux系统下你需要安装以下软件：</p>
+
+<p>PHP 安装包：php5, php5-gd, php-xml- parser,php5-intl
+数据库驱动：php5-mysql（如果你使用其他数据库，需要安装相应的数据库以及驱动）
+Curl 安装包：curl, libcurl3, php5-curl
+SMB 客户端：smbclient （这个用来挂载Windows共享文件夹的）
+Web 服务器：apache2</p>
+
+<h4>一键安装：</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install apache2 php5 php5-gd php-xml-parser php5-intl php5-sqlite php5-mysql smbclient curl libcurl3 php5-curl mysql-server</span></code></pre></td></tr></table></div></figure>
+
+
+<p>从 <a href="https://owncloud.org/install/">https://owncloud.org/install/</a> 下载最新的ownCloud Server 对于本文，我们使用owncloud-9.0.1 版本</p>
+
+<p><img src="http://starsight.github.io/images/ownclund/1.jpg"></p>
+
+<p>对于基于Debian发行版的Linux系统，web服务器的根目录为/var/www  我实际操作过程中似乎不可用，于是我就放在了html文件夹下。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd /var/www/html  #（网页目录）
+</span><span class='line'>tar jxf owncloud-9.0.1.tar.bz2 -C  /var/www/html   #(解压至web目录)
+</span><span class='line'>cd /var/www/html/owncloud  #（进入owncloud web目录）
+</span><span class='line'>mkdir data    #(建立数据库目录)
+</span><span class='line'>cd data</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>OwnCloud在安装的过程中需要对一些目录有写的权限，为此，web服务器用户（www-data对于基于Debian的系统）必须要拥有apps、data、config目录的权限。运行以下命令完成：</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#data 目录下
+</span><span class='line'>sudo chown -R www-data:www-data data 
+</span><span class='line'>sudo chown -R www-data:www-data config 
+</span><span class='line'>sudo chown -R www-data:www-data apps</span></code></pre></td></tr></table></div></figure>
+
+
+<p>还需要修改下配置文件：
+（网上说法不一,有说是 /etc/apache2/sites-enabled/000-default.conf ，还有说 /etc/httpd/conf.d/owncloud.conf 不过我没找到此文件）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo vi /etc/apache2/apache2.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>修改如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;Directory /var/www/&gt;
+</span><span class='line'>        Options Indexes FollowSymLinks
+</span><span class='line'>        AllowOverride All
+</span><span class='line'>        Require all granted
+</span><span class='line'>&lt;/Directory&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>打开浏览器，输入<a href="http://IP/owncloud">http://IP/owncloud</a></p>
+
+<p><img src="http://starsight.github.io/images/ownclund/2.jpg"></p>
+
+<p>电脑上装一下owncloud的客户端，然后操作比较简单</p>
+
+<p>看我的同步效果：</p>
+
+<p><img src="http://starsight.github.io/images/ownclund/3.jpg"></p>
+
+<p><img src="http://starsight.github.io/images/ownclund/4.jpg"></p>
+
+<p><img src="http://starsight.github.io/images/ownclund/5.jpg"></p>
+
+<p>这是局域网的访问，如果没公网ip，则可用ngrok内网转发实现。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Raspberry Pi 3 发微博]]></title>
@@ -256,7 +352,7 @@ bogus-nxdomain 这个配置文件里的选项可以反dns劫</p>
 
 <p>还有no-hosts 选项 ，默认情况下这是注释掉的, dnsmasq 会首先寻找本地的 /etc/hosts 文件，再去寻找缓存下来的域名, 最后去上游 dns 服务器寻找。所以/etc/hosts才是dnsmasq第一个寻找的地方。</p>
 
-<p>参考：<br/>
+<p>参考:<br/>
 <a href="http://www.tuicool.com/articles/bUn2Uz">http://www.tuicool.com/articles/bUn2Uz</a><br/>
 <a href="http://skypegnu1.blog.51cto.com/8991766/1641149">http://skypegnu1.blog.51cto.com/8991766/1641149</a><br/>
 <a href="http://www.xiaobaidonghui.cn/?p=400#more-400">http://www.xiaobaidonghui.cn/?p=400#more-400</a><br/>
