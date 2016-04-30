@@ -4,7 +4,7 @@
   <title><![CDATA[Starsight]]></title>
   <link href="http://starsight.github.io/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-04-30T10:40:15+08:00</updated>
+  <updated>2016-04-30T11:14:04+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -14,13 +14,159 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Raspberry Pi 3 Opencv+python的人脸识别]]></title>
+    <link href="http://starsight.github.io/blog/2016/05/01/raspberry-identify-face/"/>
+    <updated>2016-05-01T16:44:58+08:00</updated>
+    <id>http://starsight.github.io/blog/2016/05/01/raspberry-identify-face</id>
+    <content type="html"><![CDATA[<p>上次安装了opencv库，这次我们来使用一下。</p>
+
+<!--more-->
+
+
+<p>安装PIL库</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo pip install pil</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">xx</span><span class="o">.</span><span class="n">py</span><span class="p">:</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">#!/usr/bin/env python</span>
+</span><span class='line'><span class="c">#coding=utf-8</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">cv</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">detect_object</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+</span><span class='line'>    <span class="sd">&#39;&#39;&#39;检测图片，获取人脸在图片中的坐标&#39;&#39;&#39;</span>
+</span><span class='line'>    <span class="n">grayscale</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">CreateImage</span><span class="p">((</span><span class="n">image</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">height</span><span class="p">),</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">cv</span><span class="o">.</span><span class="n">CvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">grayscale</span><span class="p">,</span> <span class="n">cv</span><span class="o">.</span><span class="n">CV_BGR2GRAY</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">cascade</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">Load</span><span class="p">(</span><span class="s">&quot;/usr/local/opencv-2.4.9/data/haarcascades/haarcascade_frontalface_alt_tree.xml&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">rect</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">HaarDetectObjects</span><span class="p">(</span><span class="n">grayscale</span><span class="p">,</span> <span class="n">cascade</span><span class="p">,</span> <span class="n">cv</span><span class="o">.</span><span class="n">CreateMemStorage</span><span class="p">(),</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">cv</span><span class="o">.</span><span class="n">CV_HAAR_DO_CANNY_PRUNING</span><span class="p">,</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rect</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="n">result</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">infile</span><span class="p">):</span>
+</span><span class='line'>    <span class="sd">&#39;&#39;&#39;在原图上框出头像并且截取每个头像到单独文件夹&#39;&#39;&#39;</span>
+</span><span class='line'>    <span class="n">image</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">LoadImage</span><span class="p">(</span><span class="n">infile</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">image</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">faces</span> <span class="o">=</span> <span class="n">detect_object</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">save_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">path</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s">&quot;_face&quot;</span>
+</span><span class='line'>    <span class="k">try</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">save_path</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">except</span><span class="p">:</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">faces</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">faces</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'>            <span class="n">draw</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">outline</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</span><span class='line'>            <span class="n">a</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">crop</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span class='line'>            <span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)</span><span class="o">+</span><span class="s">&quot;.jpg&quot;</span><span class="p">)</span>
+</span><span class='line'>     <span class="c">#       print file_name</span>
+</span><span class='line'>            <span class="n">a</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">drow_save_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span><span class="s">&quot;out.jpg&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">drow_save_path</span><span class="p">,</span> <span class="s">&quot;JPEG&quot;</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">else</span><span class="p">:</span>
+</span><span class='line'>        <span class="k">print</span> <span class="s">&quot;Error: cannot detect faces on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">infile</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">process</span><span class="p">(</span><span class="s">&quot;kobe.jpg&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>接下来只要运行python xx.py</p>
+
+<p>过一会，如果图片内有人的话生成一个文件夹，里面有一张人脸的截图和一张人脸的标识图。</p>
+
+<p>以下为示例：</p>
+
+<p><img src="http://starsight.github.io/images/opencv-install/1.jpg"></p>
+
+<p><img src="http://starsight.github.io/images/opencv-install/2.jpg"></p>
+
+<p><img src="http://starsight.github.io/images/opencv-install/3.jpg"></p>
+
+<p>参考:<br/>
+<a href="http://bbs.ickey.cn/group-topic-id-67165.html">Tigerboard开发板试用体验 python+opencv的人脸识别</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Raspberry Pi 3 编译opencv]]></title>
     <link href="http://starsight.github.io/blog/2016/04/30/raspberry-opencv-install/"/>
     <updated>2016-04-30T10:18:51+08:00</updated>
     <id>http://starsight.github.io/blog/2016/04/30/raspberry-opencv-install</id>
     <content type="html"><![CDATA[<p>OpenCV的全称是：Open Source Computer Vision Library。OpenCV是一个基于（开源）发行的跨平台计算机视觉库，可以运行在Linux、Windows和Mac OS操作系统上。它轻量级而且高效——由一系列C函数和少量C++类构成，同时提供了Python、Ruby、MATLAB等语言的接口，实现了图像处理和计算机视觉方面的很多通用算法。</p>
 
-<p>需要完成项目，离不开opencv的支持，接下来我们就在树莓派上安装opencv。</p>
+<p>需要完成此次的项目，离不开opencv的支持，接下来我们就在树莓派上安装opencv。</p>
 
 <!--more-->
 

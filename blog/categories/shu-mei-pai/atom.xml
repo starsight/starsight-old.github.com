@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 树莓派 | Starsight]]></title>
   <link href="http://starsight.github.io/blog/categories/shu-mei-pai/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-04-30T10:40:15+08:00</updated>
+  <updated>2016-04-30T11:14:04+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -14,13 +14,101 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Raspberry Pi 3 Opencv+python的人脸识别]]></title>
+    <link href="http://starsight.github.io/blog/2016/05/01/raspberry-identify-face/"/>
+    <updated>2016-05-01T16:44:58+08:00</updated>
+    <id>http://starsight.github.io/blog/2016/05/01/raspberry-identify-face</id>
+    <content type="html"><![CDATA[<p>上次安装了opencv库，这次我们来使用一下。</p>
+
+<!--more-->
+
+
+<p>安装PIL库</p>
+
+<pre><code>sudo pip install pil
+</code></pre>
+
+<pre><code class="python  ">xx.py:
+
+#!/usr/bin/env python
+#coding=utf-8
+import os
+from PIL import Image, ImageDraw
+import cv
+
+def detect_object(image):
+    '''检测图片，获取人脸在图片中的坐标'''
+    grayscale = cv.CreateImage((image.width, image.height), 8, 1)
+    cv.CvtColor(image, grayscale, cv.CV_BGR2GRAY)
+
+    cascade = cv.Load("/usr/local/opencv-2.4.9/data/haarcascades/haarcascade_frontalface_alt_tree.xml")
+    rect = cv.HaarDetectObjects(grayscale, cascade, cv.CreateMemStorage(), 1.1, 2,
+        cv.CV_HAAR_DO_CANNY_PRUNING, (20,20))
+
+    result = []
+    for r in rect:
+        result.append((r[0][0], r[0][1], r[0][0]+r[0][2], r[0][1]+r[0][3]))
+
+    return result
+
+def process(infile):
+    '''在原图上框出头像并且截取每个头像到单独文件夹'''
+    image = cv.LoadImage(infile);
+    if image:
+        faces = detect_object(image)
+
+    im = Image.open(infile)
+    path = os.path.abspath(infile)
+    save_path = os.path.splitext(path)[0]+"_face"
+    try:
+        os.mkdir(save_path)
+    except:
+        pass
+    if faces:
+        draw = ImageDraw.Draw(im)
+        count = 0
+        for f in faces:
+            count += 1
+            draw.rectangle(f, outline=(255, 0, 0))
+            a = im.crop(f)
+            file_name = os.path.join(save_path,str(count)+".jpg")
+     #       print file_name
+            a.save(file_name)
+
+        drow_save_path = os.path.join(save_path,"out.jpg")
+        im.save(drow_save_path, "JPEG", quality=80)
+    else:
+        print "Error: cannot detect faces on %s" % infile
+
+if __name__ == "__main__":
+    process("kobe.jpg")
+</code></pre>
+
+<p>接下来只要运行python xx.py</p>
+
+<p>过一会，如果图片内有人的话生成一个文件夹，里面有一张人脸的截图和一张人脸的标识图。</p>
+
+<p>以下为示例：</p>
+
+<p><img src="/images/opencv-install/1.jpg"></p>
+
+<p><img src="/images/opencv-install/2.jpg"></p>
+
+<p><img src="/images/opencv-install/3.jpg"></p>
+
+<p>参考:<br/>
+<a href="http://bbs.ickey.cn/group-topic-id-67165.html">Tigerboard开发板试用体验 python+opencv的人脸识别</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Raspberry Pi 3 编译opencv]]></title>
     <link href="http://starsight.github.io/blog/2016/04/30/raspberry-opencv-install/"/>
     <updated>2016-04-30T10:18:51+08:00</updated>
     <id>http://starsight.github.io/blog/2016/04/30/raspberry-opencv-install</id>
     <content type="html"><![CDATA[<p>OpenCV的全称是：Open Source Computer Vision Library。OpenCV是一个基于（开源）发行的跨平台计算机视觉库，可以运行在Linux、Windows和Mac OS操作系统上。它轻量级而且高效——由一系列C函数和少量C++类构成，同时提供了Python、Ruby、MATLAB等语言的接口，实现了图像处理和计算机视觉方面的很多通用算法。</p>
 
-<p>需要完成项目，离不开opencv的支持，接下来我们就在树莓派上安装opencv。</p>
+<p>需要完成此次的项目，离不开opencv的支持，接下来我们就在树莓派上安装opencv。</p>
 
 <!--more-->
 
@@ -336,86 +424,6 @@ if __name__ == "__main__":
 <p><img src="/images/weibo/6.jpg"></p>
 
 <p>在之前，微博api是可以自己获得code，不需要手动到浏览器去粘贴获得，但是现在好像不可以了（但是还是有途径的），下一次再试试能不能自动登录。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Raspberry Pi 3 搭建本地DNS服务器]]></title>
-    <link href="http://starsight.github.io/blog/2016/04/23/raspberry-dnsmasq/"/>
-    <updated>2016-04-23T21:39:04+08:00</updated>
-    <id>http://starsight.github.io/blog/2016/04/23/raspberry-dnsmasq</id>
-    <content type="html"><![CDATA[<p>需求：上网时莫名地弹出广告，或者莫名的流量被消耗掉导致网速变慢。其次是部分网站域名不能正常被解析，莫名其妙地打不开，或者时好时坏。<!--more--></p>
-
-<p>管理下局域网的DNS（双十一的时候，把某宝网站直接给解析到本地ip，打不开网页，O(∩_∩)O哈哈~）</p>
-
-<p>这里我用的是dnsmasq</p>
-
-<p>安装比较简单：
-<code>
-sudo apt-get install -y dnsmasq
-</code></p>
-
-<p>下面我们就需要配置dnsmasq了，配置文件一般位于路径/etc/dnsmasq.conf</p>
-
-<p>这个文件里全是注释的内容，相当于空文件。我先备份了此文件，然后修改了一些配置：
-<code>
-resolv-file=/etc/wenjie_dns.conf
-strict-order
-cache-size=1500
-listen-address=127.0.0.1,218.195.54.90
-address=/taobao.com/218.195.54.90
-</code></p>
-
-<pre><code>resolv.conf:文件主要的作用是DNS客户机配置文件，设置DNS服务器的IP地址及DNS域名.如果我们不配置的话，默认使用 /etc/resolv.conf 网上有人说每次开机此文件都会被重写，所以就自己指定/etc/wj_dns.conf
-
-strict-order: 按照resolv.conf中nameserver顺序依次使用，本行被注释后会随机的调用nameserver
-
-cache-size: 缓存解析条数，默认是150
-
-listen-address: 监听地址，listen-address=127.0.0.1，表示这个 dnsmasq 本机自己使用有效。
-    注意：如果你想让本机所在的局域网的其它电脑也能够使用上Dnsmasq，应该把本机（树莓派）的局域网IP加上去：listen-address=218.195.54.90（树莓派的ip）,127.0.0.1
-
-address:很明显就是我们想劫下的域名了
-</code></pre>
-
-<p>在/etc/wenjie_dns.conf 写入 DNS服务器，本地的当然得放在第一个，下面的写其它稳定的就行
-<code>
-nameserver 127.0.0.1
-nameserver 202.206.240.13
-nameserver 202.206.240.12
-</code></p>
-
-<p>重启服务：
-<code>
-sudo service dnsmasq restart
-</code></p>
-
-<p>将Dnsmasq作为本地DNS服务器使用，直接修改电脑的本地DNS的IP地址即可。</p>
-
-<p><img src="/images/dns/1.jpg"></p>
-
-<p>ping 一下试试</p>
-
-<p><img src="/images/dns/2.jpg"></p>
-
-<p>大功告成。</p>
-
-<p>拦截一些广告，也可以把域名劫到127.0.0.1
-bogus-nxdomain 这个配置文件里的选项可以反dns劫</p>
-
-<p>对于dns缓存，可以用dig 命令看一下效果。
-树莓派没有安装，可以安装一下：
-<code>
-sudo apt-get install dnsutils
-</code></p>
-
-<p>还有no-hosts 选项 ，默认情况下这是注释掉的, dnsmasq 会首先寻找本地的 /etc/hosts 文件，再去寻找缓存下来的域名, 最后去上游 dns 服务器寻找。所以/etc/hosts才是dnsmasq第一个寻找的地方。</p>
-
-<p>参考:<br/>
-<a href="http://www.tuicool.com/articles/bUn2Uz">关于dnsmasq的使用配置</a><br/>
-<a href="http://skypegnu1.blog.51cto.com/8991766/1641149">Raspberry Pi （树莓派）折腾记之一</a><br/>
-<a href="http://www.xiaobaidonghui.cn/?p=400#more-400">树莓派瞎玩~9~dns服务器</a><br/>
-<a href="http://www.freehao123.com/dnsmasq/">Dnsmasq安装与配置-搭建本地DNS服务器 更干净更快无广告DNS解析</a></p>
 ]]></content>
   </entry>
   
