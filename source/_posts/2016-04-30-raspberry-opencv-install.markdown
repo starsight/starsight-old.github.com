@@ -16,7 +16,7 @@ OpenCV的全称是：Open Source Computer Vision Library。OpenCV是一个基于
 sudo apt-get install libqt4-dev libvtk5-qt4-dev
 ```
 
-接下来需要从OpenCV官方网站：http://opencv.org下载Linux版本的OpenCV的源代码：
+接下来需要从OpenCV官方网站：http://opencv.org 下载Linux版本的OpenCV的源代码：
 
 {% img /images/opencv-install/1.jpg%}
 

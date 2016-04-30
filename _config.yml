@@ -6,7 +6,7 @@ url: http://starsight.github.io
 title: Starsight
 subtitle: 不要让时代的悲剧成为你个人的悲剧
 author: wenjie
-simple_search: https://www.baidu.com/search
+simple_search: https://www.bing.com/search
 description:
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
@@ -43,15 +43,15 @@ highlighter: pygments # default python pygments have been replaced by pygments.r
 
 paginate: 10          # Posts per page on the blog index
 paginate_path: "posts/:num"  # Directory base for pagination URLs eg. /posts/2/
-recent_posts: 5       # Posts in the sidebar Recent Posts section
-excerpt_link: "Read on &rarr;"  # "Continue reading" link text at the bottom of excerpted articles
+recent_posts: 7       # Posts in the sidebar Recent Posts section
+excerpt_link: "阅读全文 &rarr;"  # "Continue reading" link text at the bottom of excerpted articles
 excerpt_separator: "<!--more-->"
 
 titlecase: true       # Converts page and post titles to titlecase
 
 # list each of the sidebar modules you want to include, in the order you want them to appear.
 # To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
-default_asides: [asides/category_list.html, asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
+default_asides: [asides/category_list.html, asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html, asides/weibo.html]
 
 # Each layout uses the default asides, but they can have their own asides instead. Simply uncomment the lines below
 # and add an array with the asides you want to use.
@@ -69,8 +69,15 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name: hewenjie	
-disqus_show_comment_count: true
+#disqus_short_name: hewenjie	
+#disqus_show_comment_count: true
 
 # Google Analytics
-google_analytics_tracking_id: UA-58223670-1
+#google_analytics_tracking_id: UA-58223670-1
+
+# Post License 
+post_license: true
+
+# duoshuo comments
+duoshuo_comments: true
+duoshuo_short_name: starsight
