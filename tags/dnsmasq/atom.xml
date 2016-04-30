@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: dnsmasq | Starsight]]></title>
   <link href="http://starsight.github.io/tags/dnsmasq/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-04-30T19:26:32+08:00</updated>
+  <updated>2016-04-30T19:31:16+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -66,11 +66,11 @@ sudo service dnsmasq restart
 
 <p>将Dnsmasq作为本地DNS服务器使用，直接修改电脑的本地DNS的IP地址即可。</p>
 
-<p>{% img /images/dns/1.jpg%}</p>
+<p><img src="/images/dns/1.jpg"></p>
 
 <p>ping 一下试试</p>
 
-<p>{% img /images/dns/2.jpg%}</p>
+<p><img src="/images/dns/2.jpg"></p>
 
 <p>大功告成。</p>
 

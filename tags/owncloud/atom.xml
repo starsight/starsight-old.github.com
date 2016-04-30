@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: owncloud | Starsight]]></title>
   <link href="http://starsight.github.io/tags/owncloud/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-04-30T19:26:32+08:00</updated>
+  <updated>2016-04-30T19:31:16+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -41,7 +41,7 @@ Web 服务器：apache2</p>
 
 <p>从 <a href="https://owncloud.org/install/">https://owncloud.org/install/</a> 下载最新的ownCloud Server 对于本文，我们使用owncloud-9.0.1 版本</p>
 
-<p>{% img /images/owncloud/1.jpg%}</p>
+<p><img src="/images/owncloud/1.jpg"></p>
 
 <p>对于基于Debian发行版的Linux系统，web服务器的根目录为/var/www  我实际操作过程中似乎不可用，于是我就放在了html文件夹下。</p>
 
@@ -77,17 +77,17 @@ sudo vi /etc/apache2/apache2.conf
 
 <p>打开浏览器，输入<a href="http://IP/owncloud">http://IP/owncloud</a></p>
 
-<p>{% img /images/owncloud/2.jpg%}</p>
+<p><img src="/images/owncloud/2.jpg"></p>
 
 <p>电脑上装一下owncloud的客户端，然后操作比较简单</p>
 
 <p>看我的同步效果：</p>
 
-<p>{% img /images/owncloud/3.jpg%}</p>
+<p><img src="/images/owncloud/3.jpg"></p>
 
-<p>{% img /images/owncloud/4.jpg%}</p>
+<p><img src="/images/owncloud/4.jpg"></p>
 
-<p>{% img /images/owncloud/5.jpg%}</p>
+<p><img src="/images/owncloud/5.jpg"></p>
 
 <p>这是局域网的访问，如果没公网ip，则可用ngrok内网转发来实现外网访问。</p>
 

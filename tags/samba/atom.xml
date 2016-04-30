@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: samba | Starsight]]></title>
   <link href="http://starsight.github.io/tags/samba/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-04-30T19:26:32+08:00</updated>
+  <updated>2016-04-30T19:31:16+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -22,21 +22,21 @@
 开箱图：
 Pi3和微雪的屏</p>
 
-<p>{% img /images/samba/1.jpg%}</p>
+<p><img src="/images/samba/1.jpg"></p>
 
-<p>{% img /images/samba/2.jpg%}</p>
+<p><img src="/images/samba/2.jpg"></p>
 
 <p>说明书多国语言：</p>
 
-<p>{% img /images/samba/3.jpg%}</p>
+<p><img src="/images/samba/3.jpg"></p>
 
 <p>正面照：</p>
 
-<p>{% img /images/samba/4.jpg%}</p>
+<p><img src="/images/samba/4.jpg"></p>
 
 <p>背面：</p>
 
-<p>{% img /images/samba/5.jpg%}</p>
+<p><img src="/images/samba/5.jpg"></p>
 
 <p>这个3的卡槽由以前的弹出式变成现在直插的，安装时候没有弹簧按压声。</p>
 
@@ -44,7 +44,7 @@ Pi3和微雪的屏</p>
 
 <p>到显示器上显示：</p>
 
-<p>{% img /images/samba/6.jpg%}</p>
+<p><img src="/images/samba/6.jpg"></p>
 
 <p>接下来扩展下TF卡:
 树莓派有傻瓜式方法：
@@ -58,7 +58,7 @@ sudo raspi-config
 
 <p>扩张后如下：</p>
 
-<p>{% img /images/samba/7.jpg%}</p>
+<p><img src="/images/samba/7.jpg"></p>
 
 <p>安装samba的话和Nanopi什么的大同小异</p>
 
@@ -85,7 +85,7 @@ chmod -R go+rwx /home/pi
 </code>
 然后查看下ip，就可以在电脑上连接啦~</p>
 
-<p>{% img /images/samba/8.jpg%}</p>
+<p><img src="/images/samba/8.jpg"></p>
 ]]></content>
   </entry>
   

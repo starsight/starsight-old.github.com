@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 微博 | Starsight]]></title>
   <link href="http://starsight.github.io/tags/wei-bo/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-04-30T19:26:32+08:00</updated>
+  <updated>2016-04-30T19:31:16+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -25,7 +25,7 @@
 <!--more-->
 
 
-<p>{% img /images/weibo/1.jpg%}</p>
+<p><img src="/images/weibo/1.jpg"></p>
 
 <pre><code>#coding=utf-8
 
@@ -84,25 +84,25 @@ if __name__ == "__main__":
 
 <p>运行之后会让你登录：</p>
 
-<p>{% img /images/weibo/2.jpg%}</p>
+<p><img src="/images/weibo/2.jpg"></p>
 
 <p>我们复制控制台显示出来的链接，粘贴到浏览器去获得code：</p>
 
-<p>{% img /images/weibo/3.jpg%}</p>
+<p><img src="/images/weibo/3.jpg"></p>
 
 <p>如果第一次登微博，就需要输一下帐号，密码，我的之前已经登陆过了。</p>
 
 <p>看地址栏最后有一串字符：</p>
 
-<p>{% img /images/weibo/4.jpg%}</p>
+<p><img src="/images/weibo/4.jpg"></p>
 
 <p>然后会问你要不要发微博，我们来发一条：</p>
 
-<p>{% img /images/weibo/5.jpg%}</p>
+<p><img src="/images/weibo/5.jpg"></p>
 
 <p>去微博看一看：</p>
 
-<p>{% img /images/weibo/6.jpg%}</p>
+<p><img src="/images/weibo/6.jpg"></p>
 
 <p>在之前，微博api是可以自己获得code，不需要手动到浏览器去粘贴获得，但是现在好像不可以了（但是还是有途径的），下一次再试试能不能自动登录。</p>
 ]]></content>
