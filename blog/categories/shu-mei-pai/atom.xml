@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 树莓派 | Starsight]]></title>
   <link href="http://starsight.github.io/blog/categories/shu-mei-pai/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-04-30T13:15:11+08:00</updated>
+  <updated>2016-04-30T14:04:21+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -138,7 +138,7 @@ sudo fswebcam --device /dev/video0  a.jpg
 <pre><code>sudo apt-get install libqt4-dev libvtk5-qt4-dev
 </code></pre>
 
-<p>接下来需要从OpenCV官方网站：<a href="http://opencv.org%E4%B8%8B%E8%BD%BDLinux%E7%89%88%E6%9C%AC%E7%9A%84OpenCV%E7%9A%84%E6%BA%90%E4%BB%A3%E7%A0%81%EF%BC%9A">http://opencv.org%E4%B8%8B%E8%BD%BDLinux%E7%89%88%E6%9C%AC%E7%9A%84OpenCV%E7%9A%84%E6%BA%90%E4%BB%A3%E7%A0%81%EF%BC%9A</a></p>
+<p>接下来需要从OpenCV官方网站：<a href="http://opencv.org">http://opencv.org</a> 下载Linux版本的OpenCV的源代码：</p>
 
 <p><img src="/images/opencv-install/1.jpg"></p>
 

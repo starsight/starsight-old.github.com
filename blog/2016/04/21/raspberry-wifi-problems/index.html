@@ -27,20 +27,28 @@ sudo vi /etc/wpa_supplicant/wpa_supplicant.conf 由于回宿舍，没有显示�
   
   <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--
-Fonts from Google"s Web font directory at http://google.com/webfonts -->
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
-<script>
-	function addBlankTargetForLinks () {
-	  $('a[href^="http"]').each(function(){
-		  $(this).attr('target', '_blank');
-	  });
-	}
-	$(document).bind('DOMNodeInserted', function(event) {
-	  addBlankTargetForLinks();
-	});
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
 </script>
 
   
@@ -60,7 +68,7 @@ Fonts from Google"s Web font directory at http://google.com/webfonts -->
   
 </ul>
   
-<form action="https://www.baidu.com/search" method="get">
+<form action="https://www.bing.com/search" method="get">
   <fieldset role="search">
     <input type="hidden" name="sitesearch" value="starsight.github.io">
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
@@ -90,9 +98,6 @@ Fonts from Google"s Web font directory at http://google.com/webfonts -->
 
 
 <time class='entry-date' datetime='2016-04-21T19:59:09+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>7:59 pm</span></time>
-        
-           | <a href="#disqus_thread"
-             data-disqus-identifier="http://starsight.github.io">Comments</a>
         
       </p>
     
@@ -222,12 +227,6 @@ Fonts from Google"s Web font directory at http://google.com/webfonts -->
   </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
 </div>
 
 <aside class="sidebar">
@@ -270,12 +269,28 @@ Fonts from Google"s Web font directory at http://google.com/webfonts -->
         <a href="/blog/2016/04/24/raspberry-weibo/">Raspberry Pi 3 发微博</a>
       </li>
     
+      <li class="post">
+        <a href="/blog/2016/04/23/raspberry-dnsmasq/">Raspberry Pi 3 搭建本地DNS服务器</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/22/raspberry-baiduyun/">Raspberry Pi 3 中文显示及输入+百度云传输</a>
+      </li>
+    
   </ul>
 </section>
 
 ﻿
 
 
+<section>
+    <h1>weibo</h1>
+    <ul id="weibo">
+    <li>
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=0&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=1585017253&verifier=47bdb406&dpc=1"></iframe>
+    </li>
+    </ul>
+</section> 
 
   
 </aside>
@@ -299,29 +314,13 @@ var _hmt = _hmt || [];
 </p>
 
 </footer>
-  
+  <!--
 
-<script type="text/javascript">
-      var disqus_shortname = 'hewenjie';
-      
-        
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://starsight.github.io/blog/2016/04/21/raspberry-wifi-problems/';
-        var disqus_url = 'http://starsight.github.io/blog/2016/04/21/raspberry-wifi-problems/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
+ -->
 <!--
  -->
-
-
+<!--
+ -->
 <!--
  -->
 
