@@ -7,7 +7,7 @@ categories: 2016-04 树莓派
 ---
 OpenCV的全称是：Open Source Computer Vision Library。OpenCV是一个基于（开源）发行的跨平台计算机视觉库，可以运行在Linux、Windows和Mac OS操作系统上。它轻量级而且高效——由一系列C函数和少量C++类构成，同时提供了Python、Ruby、MATLAB等语言的接口，实现了图像处理和计算机视觉方面的很多通用算法。
 
-需要完成项目，离不开opencv的支持，接下来我们就在树莓派上安装opencv。
+需要完成此次的项目，离不开opencv的支持，接下来我们就在树莓派上安装opencv。
 <!--more-->
 
 安装OpenCV的依赖包：
