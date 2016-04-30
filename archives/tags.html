@@ -5,11 +5,19 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Raspberry Pi 3 编译opencv - Starsight</title>
+  <title>Tag Archive - Starsight</title>
   <meta name="author" content="wenjie">
 
   
-  <meta name="description" content="OpenCV的全称是：Open Source Computer Vision Library。OpenCV是一个基于（开源）发行的跨平台计算机视觉库，可以运行在Linux、Windows和Mac OS操作系统上。它轻量级而且高效——由一系列C函数和少量C++类构成，同时提供了Python、Ruby &hellip;">
+  <meta name="description" content="Tag Archive Tags 文章分类 2015-01 (4)
+2015-02 (1)
+2015-03 (1)
+2015-04 (1)
+2015-07 (1)
+2015-11 (2)
+2016-04 (8)
+2016-05 (1)
+树莓派 (9) 最近文章 Raspberry Pi 3 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +26,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://starsight.github.io/blog/2016/04/30/raspberry-opencv-install">
+  <link rel="canonical" href="http://starsight.github.io/archives/tags.html">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Starsight" type="application/atom+xml">
@@ -83,143 +91,21 @@ $(document).bind('DOMNodeInserted', function(event) {
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Raspberry Pi 3 编译opencv</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-04-30T10:18:51+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:18 am</span></time>
-        <!---->
-		
-			| <a href="#comments">Comments</a>
-		
-      </p>
+    <h1 class="entry-title">Tag Archive</h1>
     
   </header>
+  
+  <div id="tag-archives">
+  <h2>Tags</h2>
+  <ul class="tag-cloud">
 
-
-<div class="entry-content"><p>OpenCV的全称是：Open Source Computer Vision Library。OpenCV是一个基于（开源）发行的跨平台计算机视觉库，可以运行在Linux、Windows和Mac OS操作系统上。它轻量级而且高效——由一系列C函数和少量C++类构成，同时提供了Python、Ruby、MATLAB等语言的接口，实现了图像处理和计算机视觉方面的很多通用算法。</p>
-
-<p>需要完成此次的项目，离不开opencv的支持，接下来我们就在树莓派上安装opencv。</p>
-
-<!--more-->
-
-
-<p>安装OpenCV的依赖包：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libqt4-dev libvtk5-qt4-dev</span></code></pre></td></tr></table></div></figure>
-
-
-<p>接下来需要从OpenCV官方网站：<a href="http://opencv.org">http://opencv.org</a> 下载Linux版本的OpenCV的源代码：</p>
-
-<p><img src="/images/opencv-install/1.jpg"></p>
-
-<p>我选择Linux平台下的2.4.9版本的源码包，将压缩包解压到/usr/local目录下。</p>
-
-<p>进入opencv-2.4.9目录，新建一个build目录：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mkdir build</span></code></pre></td></tr></table></div></figure>
-
-
-<p>先安装 cmake</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install cmake</span></code></pre></td></tr></table></div></figure>
-
-
-<p>进入build目录，利用下面的cmake命令进行编译设置：</p>
-
-<p>注意下python部分：</p>
-
-<p><img src="/images/opencv-install/2.jpg"></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cmake -D CMAKE_BUILD_TYPE=RELEASE -D .. </span></code></pre></td></tr></table></div></figure>
-
-
-<p>等待检测和设置完成,就可以开始编译了:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo make
-</span><span class='line'>sudo make install
-</span><span class='line'>#更新搜索动态链接库
-</span><span class='line'>sudo ldconfig </span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/opencv-install/3.jpg"></p>
-
-<p><img src="/images/opencv-install/4.jpg"></p>
-
-<p>在python环境下执行</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>import cv</span></code></pre></td></tr></table></div></figure>
-
-
-<p>没有报错则安装成功~</p>
-
-<p>参考:<br/>
-<a href="http://jjliu.blog.ustc.edu.cn/198/">GoBian安装OpenCV2.4.10</a> <br/>
-<a href="http://blog.csdn.net/xukai871105/article/details/40988101">树莓派学习笔记—— 源代码方式安装opencv </a></p>
+  </ul>
 </div>
 
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">wenjie</span></span>
-
-      
-
-
-
-
-<time class='entry-date' datetime='2016-04-30T10:18:51+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:18 am</span></time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/2016-04/'>2016-04</a>, <a class='category' href='/blog/categories/shu-mei-pai/'>树莓派</a>
-  
-</span>
-
-
-      
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2016/04/29/raspberry-owncloud/" title="Previous Post: Raspberry Pi 3 使用owncloud云服务">&laquo; Raspberry Pi 3 使用owncloud云服务</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2016/05/01/raspberry-identify-face/" title="Next Post: Raspberry Pi 3 opencv+python的人脸识别">Raspberry Pi 3 opencv+python的人脸识别 &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
 </div>
