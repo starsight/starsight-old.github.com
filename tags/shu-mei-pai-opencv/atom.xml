@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: 2016-05 | Starsight]]></title>
-  <link href="http://starsight.github.io/blog/categories/2016-05/atom.xml" rel="self"/>
+  <title><![CDATA[Tag: 树莓派 opencv | Starsight]]></title>
+  <link href="http://starsight.github.io/tags/shu-mei-pai-opencv/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
   <updated>2016-04-30T19:17:51+08:00</updated>
   <id>http://starsight.github.io/</id>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Raspberry Pi 3 Opencv+python的人脸识别]]></title>
+    <title type="html"><![CDATA[Raspberry Pi 3 opencv+python的人脸识别]]></title>
     <link href="http://starsight.github.io/blog/2016/05/01/raspberry-identify-face/"/>
     <updated>2016-05-01T16:44:58+08:00</updated>
     <id>http://starsight.github.io/blog/2016/05/01/raspberry-identify-face</id>
@@ -118,6 +118,73 @@ sudo fswebcam --device /dev/video0  a.jpg
 <p>参考:<br/>
 <a href="http://bbs.ickey.cn/group-topic-id-67165.html">Tigerboard开发板试用体验 python+opencv的人脸识别</a> <br/>
 <a href="http://blog.csdn.net/u010873775/article/details/50615834">NanoPi2试用体验 简单人脸识别-结项</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Pi 3 编译opencv]]></title>
+    <link href="http://starsight.github.io/blog/2016/04/30/raspberry-opencv-install/"/>
+    <updated>2016-04-30T10:18:51+08:00</updated>
+    <id>http://starsight.github.io/blog/2016/04/30/raspberry-opencv-install</id>
+    <content type="html"><![CDATA[<p>OpenCV的全称是：Open Source Computer Vision Library。OpenCV是一个基于（开源）发行的跨平台计算机视觉库，可以运行在Linux、Windows和Mac OS操作系统上。它轻量级而且高效——由一系列C函数和少量C++类构成，同时提供了Python、Ruby、MATLAB等语言的接口，实现了图像处理和计算机视觉方面的很多通用算法。</p>
+
+<p>需要完成此次的项目，离不开opencv的支持，接下来我们就在树莓派上安装opencv。</p>
+
+<!--more-->
+
+
+<p>安装OpenCV的依赖包：</p>
+
+<pre><code>sudo apt-get install libqt4-dev libvtk5-qt4-dev
+</code></pre>
+
+<p>接下来需要从OpenCV官方网站：<a href="http://opencv.org">http://opencv.org</a> 下载Linux版本的OpenCV的源代码：</p>
+
+<p><img src="/images/opencv-install/1.jpg"></p>
+
+<p>我选择Linux平台下的2.4.9版本的源码包，将压缩包解压到/usr/local目录下。</p>
+
+<p>进入opencv-2.4.9目录，新建一个build目录：</p>
+
+<pre><code>sudo mkdir build
+</code></pre>
+
+<p>先安装 cmake</p>
+
+<pre><code>sudo apt-get install cmake
+</code></pre>
+
+<p>进入build目录，利用下面的cmake命令进行编译设置：</p>
+
+<p>注意下python部分：</p>
+
+<p><img src="/images/opencv-install/2.jpg"></p>
+
+<pre><code>cmake -D CMAKE_BUILD_TYPE=RELEASE -D .. 
+</code></pre>
+
+<p>等待检测和设置完成,就可以开始编译了:</p>
+
+<pre><code>sudo make
+sudo make install
+#更新搜索动态链接库
+sudo ldconfig 
+</code></pre>
+
+<p><img src="/images/opencv-install/3.jpg"></p>
+
+<p><img src="/images/opencv-install/4.jpg"></p>
+
+<p>在python环境下执行</p>
+
+<pre><code>import cv
+</code></pre>
+
+<p>没有报错则安装成功~</p>
+
+<p>参考:<br/>
+<a href="http://jjliu.blog.ustc.edu.cn/198/">GoBian安装OpenCV2.4.10</a> <br/>
+<a href="http://blog.csdn.net/xukai871105/article/details/40988101">树莓派学习笔记—— 源代码方式安装opencv </a></p>
 ]]></content>
   </entry>
   
