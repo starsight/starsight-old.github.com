@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 2016-05 | Starsight]]></title>
   <link href="http://starsight.github.io/blog/categories/2016-05/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-04-30T18:44:11+08:00</updated>
+  <updated>2016-04-30T18:53:25+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -90,11 +90,11 @@ if __name__ == "__main__":
 
 <p>以下为示例：</p>
 
-<p>{% img /images/face/1.jpg%}</p>
+<p><img src="/images/face/1.jpg"></p>
 
-<p>{% img /images/face/2.jpg%}</p>
+<p><img src="/images/face/2.jpg"></p>
 
-<p>{% img /images/face/3.jpg%}</p>
+<p><img src="/images/face/3.jpg"></p>
 
 <p>接下来用一下摄像头：</p>
 
@@ -109,9 +109,9 @@ sudo fswebcam --device /dev/video0  a.jpg
 
 <p>看一下效果：</p>
 
-<p>{% img /images/face/4.jpg%}</p>
+<p><img src="/images/face/4.jpg"></p>
 
-<p>{% img /images/face/5.jpg%}</p>
+<p><img src="/images/face/5.jpg"></p>
 
 <p>光线不好还是能认出来，说明opencv自带的分类器算开源里面不错的了~</p>
 
