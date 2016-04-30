@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 树莓派 | Starsight]]></title>
   <link href="http://starsight.github.io/blog/categories/shu-mei-pai/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-04-29T14:43:33+08:00</updated>
+  <updated>2016-04-30T10:40:15+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Pi 3 编译opencv]]></title>
+    <link href="http://starsight.github.io/blog/2016/04/30/raspberry-opencv-install/"/>
+    <updated>2016-04-30T10:18:51+08:00</updated>
+    <id>http://starsight.github.io/blog/2016/04/30/raspberry-opencv-install</id>
+    <content type="html"><![CDATA[<p>OpenCV的全称是：Open Source Computer Vision Library。OpenCV是一个基于（开源）发行的跨平台计算机视觉库，可以运行在Linux、Windows和Mac OS操作系统上。它轻量级而且高效——由一系列C函数和少量C++类构成，同时提供了Python、Ruby、MATLAB等语言的接口，实现了图像处理和计算机视觉方面的很多通用算法。</p>
+
+<p>需要完成项目，离不开opencv的支持，接下来我们就在树莓派上安装opencv。</p>
+
+<!--more-->
+
+
+<p>安装OpenCV的依赖包：</p>
+
+<pre><code>sudo apt-get install libqt4-dev libvtk5-qt4-dev
+</code></pre>
+
+<p>接下来需要从OpenCV官方网站：<a href="http://opencv.org%E4%B8%8B%E8%BD%BDLinux%E7%89%88%E6%9C%AC%E7%9A%84OpenCV%E7%9A%84%E6%BA%90%E4%BB%A3%E7%A0%81%EF%BC%9A">http://opencv.org%E4%B8%8B%E8%BD%BDLinux%E7%89%88%E6%9C%AC%E7%9A%84OpenCV%E7%9A%84%E6%BA%90%E4%BB%A3%E7%A0%81%EF%BC%9A</a></p>
+
+<p><img src="/images/opencv-install/1.jpg"></p>
+
+<p>我选择Linux平台下的2.4.9版本的源码包，将压缩包解压到/usr/local目录下。</p>
+
+<p>进入opencv-2.4.9目录，新建一个build目录：</p>
+
+<pre><code>sudo mkdir build
+</code></pre>
+
+<p>先安装 cmake</p>
+
+<pre><code>sudo apt-get install cmake
+</code></pre>
+
+<p>进入build目录，利用下面的cmake命令进行编译设置：</p>
+
+<p>注意下python部分：</p>
+
+<p><img src="/images/opencv-install/2.jpg"></p>
+
+<pre><code>cmake -D CMAKE_BUILD_TYPE=RELEASE -D .. 
+</code></pre>
+
+<p>等待检测和设置完成,就可以开始编译了:</p>
+
+<pre><code>sudo make
+sudo make install
+#更新搜索动态链接库
+sudo ldconfig 
+</code></pre>
+
+<p><img src="/images/opencv-install/3.jpg"></p>
+
+<p><img src="/images/opencv-install/4.jpg"></p>
+
+<p>在python环境下执行</p>
+
+<pre><code>import cv
+</code></pre>
+
+<p>没有报错则安装成功~</p>
+
+<p>参考:<br/>
+<a href="http://jjliu.blog.ustc.edu.cn/198/">GoBian安装OpenCV2.4.10</a> <br/>
+<a href="http://blog.csdn.net/xukai871105/article/details/40988101">树莓派学习笔记—— 源代码方式安装opencv </a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Raspberry Pi 3 使用owncloud云服务]]></title>
@@ -106,6 +173,9 @@ sudo vi /etc/apache2/apache2.conf
     <id>http://starsight.github.io/blog/2016/04/28/raspberry-ngrok</id>
     <content type="html"><![CDATA[<p>现在很多宽带服务都不分公网ip，那怎么让外网访问树莓派的服务呢？
 ngrok 就可以实现外网访问树莓派，ngrok的具体介绍和实现就不说了，主要来看看怎么使用。</p>
+
+<!--more-->
+
 
 <p>我用的是国内的ngrok.cc 的服务。</p>
 
@@ -346,109 +416,6 @@ sudo apt-get install dnsutils
 <a href="http://skypegnu1.blog.51cto.com/8991766/1641149">Raspberry Pi （树莓派）折腾记之一</a><br/>
 <a href="http://www.xiaobaidonghui.cn/?p=400#more-400">树莓派瞎玩~9~dns服务器</a><br/>
 <a href="http://www.freehao123.com/dnsmasq/">Dnsmasq安装与配置-搭建本地DNS服务器 更干净更快无广告DNS解析</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Raspberry Pi 3 中文显示及输入+百度云传输]]></title>
-    <link href="http://starsight.github.io/blog/2016/04/22/raspberry-baiduyun/"/>
-    <updated>2016-04-22T21:07:14+08:00</updated>
-    <id>http://starsight.github.io/blog/2016/04/22/raspberry-baiduyun</id>
-    <content type="html"><![CDATA[<p>树莓派系统显示中文的话，大部分都是一个的小方块，还好我们有非常无私的开源者：
-<code>
-sudo apt-get install ttf-wqy-zenhei
-</code>
-文泉驿的开源中文字体，树莓派全网唯一的开源中文字体库</p>
-
-<p>能显示中文，输入也是必不可少的：<!--more-->
-<code>
-sudo apt-get install scim-pinyin
-</code>
-快捷键也是Ctrl+空格
-<code>
-sudo raspi-config
-</code></p>
-
-<p><img src="/images/baiduyun/1.jpg"></p>
-
-<p>然后选择第五项Internationalisation Options，change_locale，在Default locale for the system environment:中选择zh_CN.UTF-8</p>
-
-<p>重启就可以生效啦~</p>
-
-<p>下面装神器：百度云~</p>
-
-<p><a href="https://github.com/houtianze/bypy">https://github.com/houtianze/bypy</a>
-这是地址，把它下载到树莓派上，解压。</p>
-
-<p>我的树莓派好多python库都装了，所以直接：
-<code>
-./bypy.py info
-</code></p>
-
-<p>在浏览器中粘贴那个网址，再输入你的百度账号，
-会得到一串授权码。</p>
-
-<p><img src="/images/baiduyun/2.jpg"></p>
-
-<p>粘贴到刚才的终端上：</p>
-
-<p><img src="/images/baiduyun/3.jpg"></p>
-
-<p>好了，至此就搞定了~</p>
-
-<p>下面测试下：
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>显示使用帮助和所有命令（英文）:
-</span><span class='line'>bypy.py&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;更详细的了解某一个命令：
-</span><span class='line'>bypy.py help &lt;command&gt;&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;显示在云盘（程序的）根目录下文件列表：
-</span><span class='line'>bypy.py list&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;把当前目录同步到云盘：
-</span><span class='line'>bypy.py syncup
-</span><span class='line'>or
-</span><span class='line'>bypy.py upload&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;把云盘内容同步到本地来：
-</span><span class='line'>bypy.py syncdown
-</span><span class='line'>or
-</span><span class='line'>bypy.py downdir /&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h2&gt;比较本地当前目录和云盘（程序的）根目录（这个很有用）：##&lt;/h2&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;bypy.py compare</span></code></pre></td></tr></table></div></figure></p>
-
-<p>上传下，看一下我的百度云，有了！</p>
-
-<p><img src="/images/baiduyun/4.jpg"></p>
-
-<p>下载：</p>
-
-<p><img src="/images/baiduyun/5.jpg"></p>
 ]]></content>
   </entry>
   

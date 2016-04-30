@@ -4,7 +4,7 @@
   <title><![CDATA[Starsight]]></title>
   <link href="http://starsight.github.io/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-04-29T14:43:33+08:00</updated>
+  <updated>2016-04-30T10:40:15+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -12,6 +12,82 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Pi 3 编译opencv]]></title>
+    <link href="http://starsight.github.io/blog/2016/04/30/raspberry-opencv-install/"/>
+    <updated>2016-04-30T10:18:51+08:00</updated>
+    <id>http://starsight.github.io/blog/2016/04/30/raspberry-opencv-install</id>
+    <content type="html"><![CDATA[<p>OpenCV的全称是：Open Source Computer Vision Library。OpenCV是一个基于（开源）发行的跨平台计算机视觉库，可以运行在Linux、Windows和Mac OS操作系统上。它轻量级而且高效——由一系列C函数和少量C++类构成，同时提供了Python、Ruby、MATLAB等语言的接口，实现了图像处理和计算机视觉方面的很多通用算法。</p>
+
+<p>需要完成项目，离不开opencv的支持，接下来我们就在树莓派上安装opencv。</p>
+
+<!--more-->
+
+
+<p>安装OpenCV的依赖包：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libqt4-dev libvtk5-qt4-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<p>接下来需要从OpenCV官方网站：<a href="http://opencv.org%E4%B8%8B%E8%BD%BDLinux%E7%89%88%E6%9C%AC%E7%9A%84OpenCV%E7%9A%84%E6%BA%90%E4%BB%A3%E7%A0%81%EF%BC%9A">http://opencv.org%E4%B8%8B%E8%BD%BDLinux%E7%89%88%E6%9C%AC%E7%9A%84OpenCV%E7%9A%84%E6%BA%90%E4%BB%A3%E7%A0%81%EF%BC%9A</a></p>
+
+<p><img src="http://starsight.github.io/images/opencv-install/1.jpg"></p>
+
+<p>我选择Linux平台下的2.4.9版本的源码包，将压缩包解压到/usr/local目录下。</p>
+
+<p>进入opencv-2.4.9目录，新建一个build目录：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mkdir build</span></code></pre></td></tr></table></div></figure>
+
+
+<p>先安装 cmake</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install cmake</span></code></pre></td></tr></table></div></figure>
+
+
+<p>进入build目录，利用下面的cmake命令进行编译设置：</p>
+
+<p>注意下python部分：</p>
+
+<p><img src="http://starsight.github.io/images/opencv-install/2.jpg"></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cmake -D CMAKE_BUILD_TYPE=RELEASE -D .. </span></code></pre></td></tr></table></div></figure>
+
+
+<p>等待检测和设置完成,就可以开始编译了:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo make
+</span><span class='line'>sudo make install
+</span><span class='line'>#更新搜索动态链接库
+</span><span class='line'>sudo ldconfig </span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://starsight.github.io/images/opencv-install/3.jpg"></p>
+
+<p><img src="http://starsight.github.io/images/opencv-install/4.jpg"></p>
+
+<p>在python环境下执行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>import cv</span></code></pre></td></tr></table></div></figure>
+
+
+<p>没有报错则安装成功~</p>
+
+<p>参考:<br/>
+<a href="http://jjliu.blog.ustc.edu.cn/198/">GoBian安装OpenCV2.4.10</a> <br/>
+<a href="http://blog.csdn.net/xukai871105/article/details/40988101">树莓派学习笔记—— 源代码方式安装opencv </a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Raspberry Pi 3 使用owncloud云服务]]></title>
@@ -122,6 +198,9 @@ Web 服务器：apache2</p>
     <id>http://starsight.github.io/blog/2016/04/28/raspberry-ngrok</id>
     <content type="html"><![CDATA[<p>现在很多宽带服务都不分公网ip，那怎么让外网访问树莓派的服务呢？
 ngrok 就可以实现外网访问树莓派，ngrok的具体介绍和实现就不说了，主要来看看怎么使用。</p>
+
+<!--more-->
+
 
 <p>我用的是国内的ngrok.cc 的服务。</p>
 
