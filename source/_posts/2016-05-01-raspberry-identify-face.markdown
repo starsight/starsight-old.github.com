@@ -14,8 +14,9 @@ categories: 2016-05 树莓派
 sudo pip install pil
 ```
 
+```python  
 xx.py:
-```python
+
 #!/usr/bin/env python
 #coding=utf-8
 import os
