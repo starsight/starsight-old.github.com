@@ -34,3 +34,4 @@ function goTop(acceleration, time)
                 var invokeFunction = "goTop(" + acceleration + ", " + time + ")";
                 window.setTimeout(invokeFunction, time);
         }
+}
