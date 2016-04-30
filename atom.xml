@@ -4,7 +4,7 @@
   <title><![CDATA[Starsight]]></title>
   <link href="http://starsight.github.io/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-04-30T11:14:04+08:00</updated>
+  <updated>2016-04-30T12:21:30+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -148,14 +148,39 @@
 
 <p>以下为示例：</p>
 
-<p><img src="http://starsight.github.io/images/opencv-install/1.jpg"></p>
+<p><img src="http://starsight.github.io/images/face/1.jpg"></p>
 
-<p><img src="http://starsight.github.io/images/opencv-install/2.jpg"></p>
+<p><img src="http://starsight.github.io/images/face/2.jpg"></p>
 
-<p><img src="http://starsight.github.io/images/opencv-install/3.jpg"></p>
+<p><img src="http://starsight.github.io/images/face/3.jpg"></p>
+
+<p>接下来用一下摄像头：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">fswebcam</span>
+</span><span class='line'><span class="n">sudo</span> <span class="n">fswebcam</span> <span class="o">--</span><span class="n">device</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">video0</span>  <span class="n">a</span><span class="o">.</span><span class="n">jpg</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 process(&ldquo;kobe.jpg&rdquo;) 前面加一句:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;fswebcam --device /dev/video0 /home/pi/Desktop/kobe.jpg&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>看一下效果：</p>
+
+<p><img src="http://starsight.github.io/images/face/4.jpg"></p>
+
+<p><img src="http://starsight.github.io/images/face/5.jpg"></p>
+
+<p>光线不好还是能认出来，说明opencv自带的分类器算开源里面不错的了~</p>
 
 <p>参考:<br/>
-<a href="http://bbs.ickey.cn/group-topic-id-67165.html">Tigerboard开发板试用体验 python+opencv的人脸识别</a></p>
+<a href="http://bbs.ickey.cn/group-topic-id-67165.html">Tigerboard开发板试用体验 python+opencv的人脸识别</a> <br/>
+<a href="http://blog.csdn.net/u010873775/article/details/50615834">NanoPi2试用体验 简单人脸识别-结项</a></p>
 ]]></content>
   </entry>
   
