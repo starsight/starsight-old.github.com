@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 百度云 | Starsight]]></title>
+  <link href="http://starsight.github.io/tags/bai-du-yun/atom.xml" rel="self"/>
+  <link href="http://starsight.github.io/"/>
+  <updated>2016-04-30T19:26:32+08:00</updated>
+  <id>http://starsight.github.io/</id>
+  <author>
+    <name><![CDATA[wenjie]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Pi 3 中文显示及输入+百度云传输]]></title>
+    <link href="http://starsight.github.io/blog/2016/04/22/raspberry-baiduyun/"/>
+    <updated>2016-04-22T21:07:14+08:00</updated>
+    <id>http://starsight.github.io/blog/2016/04/22/raspberry-baiduyun</id>
+    <content type="html"><![CDATA[<p>树莓派系统显示中文的话，大部分都是一个的小方块，还好我们有非常无私的开源者：
+<code>
+sudo apt-get install ttf-wqy-zenhei
+</code>
+文泉驿的开源中文字体，树莓派全网唯一的开源中文字体库</p>
+
+<p>能显示中文，输入也是必不可少的：<!--more-->
+<code>
+sudo apt-get install scim-pinyin
+</code>
+快捷键也是Ctrl+空格
+<code>
+sudo raspi-config
+</code></p>
+
+<p>{% img /images/baiduyun/1.jpg%}</p>
+
+<p>然后选择第五项Internationalisation Options，change_locale，在Default locale for the system environment:中选择zh_CN.UTF-8</p>
+
+<p>重启就可以生效啦~</p>
+
+<p>下面装神器：百度云~</p>
+
+<p><a href="https://github.com/houtianze/bypy">https://github.com/houtianze/bypy</a>
+这是地址，把它下载到树莓派上，解压。</p>
+
+<p>我的树莓派好多python库都装了，所以直接：
+<code>
+./bypy.py info
+</code></p>
+
+<p>在浏览器中粘贴那个网址，再输入你的百度账号，
+会得到一串授权码。</p>
+
+<p>{% img /images/baiduyun/2.jpg%}</p>
+
+<p>粘贴到刚才的终端上：</p>
+
+<p>{% img /images/baiduyun/3.jpg%}</p>
+
+<p>好了，至此就搞定了~</p>
+
+<p>下面测试下：
+&#8220;`
+显示使用帮助和所有命令（英文）:
+bypy.py</p>
+
+<p>更详细的了解某一个命令：
+bypy.py help <command></p>
+
+<p>显示在云盘（程序的）根目录下文件列表：
+bypy.py list</p>
+
+<p>把当前目录同步到云盘：
+bypy.py syncup
+or
+bypy.py upload</p>
+
+<p>把云盘内容同步到本地来：
+bypy.py syncdown
+or
+bypy.py downdir /</p>
+
+<h2>比较本地当前目录和云盘（程序的）根目录（这个很有用）：##</h2>
+
+<p>bypy.py compare
+&#8220;`</p>
+
+<p>上传下，看一下我的百度云，有了！</p>
+
+<p>{% img /images/baiduyun/4.jpg%}</p>
+
+<p>下载：</p>
+
+<p>{% img /images/baiduyun/5.jpg%}</p>
+]]></content>
+  </entry>
+  
+</feed>
