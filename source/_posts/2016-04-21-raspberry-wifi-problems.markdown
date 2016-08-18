@@ -2,6 +2,9 @@
 layout: post
 title: "Raspberry Pi 3 wifi问题"
 date: 2016-04-21 19:59:09 +0800
+tags: [树莓派]
+keywords: wifi 树莓派3
+description: 树莓派3最新入门教程
 comments: true
 categories: 2016-04 树莓派
 ---

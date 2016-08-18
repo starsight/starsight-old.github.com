@@ -2,6 +2,9 @@
 layout: post
 title: "Raspberry Pi 3 编译opencv"
 date: 2016-04-30 10:18:51 +0800
+tags: [树莓派]
+keywords: 编译 opencv 树莓派
+description: 树莓派3最新入门教程
 comments: true
 categories: 2016-04 树莓派
 ---

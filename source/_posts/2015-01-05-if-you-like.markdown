@@ -2,6 +2,7 @@
 layout: post
 title: "如果你想去做的话"
 date: 2015-01-03 18:28:45 +0800
+tags: [思绪]
 comments: true
 categories:	['2015-01']
 ---

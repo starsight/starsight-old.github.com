@@ -2,6 +2,7 @@
 layout: post
 title: "趁年轻，做点自己不喜欢的事"
 date: 2015-11-27 18:47:16 +0800
+tags: [思绪]
 comments: true
 categories: 2015-11
 ---

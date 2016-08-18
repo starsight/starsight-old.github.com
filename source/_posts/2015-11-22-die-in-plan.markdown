@@ -2,6 +2,7 @@
 layout: post
 title: "计划下的牺牲"
 date: 2015-11-22 22:58:50 +0800
+tags: [思绪]
 comments: true
 categories: 2015-11
 ---

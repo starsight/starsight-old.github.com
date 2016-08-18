@@ -2,6 +2,7 @@
 layout: post
 title: "大三的结束与开始"
 date: 2015-01-23 13:58:12 +0800
+tags: [思绪]
 comments: true
 categories:	['2015-01']
 ---

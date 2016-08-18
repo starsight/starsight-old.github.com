@@ -2,6 +2,7 @@
 layout: post
 title: "人各有志，从来就不是你堕落的理由"
 date: 2015-01-09 22:57:29 +0800
+tags: [思绪]
 comments: true
 categories:  ['2015-01']
 ---

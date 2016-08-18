@@ -2,6 +2,9 @@
 layout: post
 title: "Raspberry Pi 3 发微博"
 date: 2016-04-24 21:57:51 +0800
+tags: [树莓派]
+keywords: 树莓派 weibo 微博
+description: 树莓派3最新入门教程
 comments: true
 categories: 2016-04 树莓派
 ---

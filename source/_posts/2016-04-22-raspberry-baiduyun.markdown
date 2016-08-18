@@ -2,6 +2,9 @@
 layout: post
 title: "Raspberry Pi 3 中文显示及输入+百度云传输"
 date: 2016-04-22 21:07:14 +0800
+tags: [树莓派]
+keywords: 中文显示 中文输入 树莓派 百度云
+description: 树莓派3最新入门教程
 comments: true
 categories: 2016-04 树莓派
 ---

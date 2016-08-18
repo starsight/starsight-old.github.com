@@ -2,6 +2,9 @@
 layout: post
 title: "Raspberry Pi 3 开箱+扩容+samba"
 date: 2016-04-20 20:33:34 +0800
+tags: [树莓派]
+keywords: 扩容 samba 树莓派
+description: 树莓派3最新入门教程
 comments: true
 categories: 2016-04 树莓派
 ---

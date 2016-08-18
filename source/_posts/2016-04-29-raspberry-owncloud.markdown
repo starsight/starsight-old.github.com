@@ -2,6 +2,9 @@
 layout: post
 title: "Raspberry Pi 3 使用owncloud云服务"
 date: 2016-04-29 10:48:51 +0800
+tags: [树莓派]
+keywords: 云服务 owncloud 树莓派
+description: 树莓派3最新入门教程
 comments: true
 categories: 2016-04 树莓派
 ---
