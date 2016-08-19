@@ -4,7 +4,7 @@
   <title><![CDATA[Starsight]]></title>
   <link href="http://starsight.github.io/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-04-30T19:36:51+08:00</updated>
+  <updated>2016-08-19T10:56:04+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Xingji-2]]></title>
+    <link href="http://starsight.github.io/blog/2016/08/19/xingji-2/"/>
+    <updated>2016-08-19T10:42:02+08:00</updated>
+    <id>http://starsight.github.io/blog/2016/08/19/xingji-2</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[行迹开篇]]></title>
+    <link href="http://starsight.github.io/blog/2016/08/18/xingji-1/"/>
+    <updated>2016-08-18T22:15:36+08:00</updated>
+    <id>http://starsight.github.io/blog/2016/08/18/xingji-1</id>
+    <content type="html"><![CDATA[<p>毕业前开始写一款应用，经过一次大的重构，现在这个应用已经稍微像点样子了，准备开始一边写技术总结，一边做下去。<!--more--></p>
+
+<p>因为开发应用的时候，android基本玩的差不多了，算是边学边开发，所以很多架构比较散，不最优，只能慢慢地一步一不提升了。我们总是由弱到强的嘛！</p>
+
+<p>说正题，这款应用我很久之前就想做了，但是一直犹豫以后做的方向，是嵌入式还是android，现在基本选择android方向了，除非过两年android衰弱的不行，VR/物联网崛起那就再看咯。应用的名字叫“行迹”，主要是针对一些爱四处旅行的人记录下自己的脚步，算是一个总结和念想，有点类似于qq空间或者朋友圈的签到，不过这个更多的是给自己看的，而不是一种“炫耀”的签到（当然后期有能力的话还是会做社交类的），同时这个更加基于位置而签到，重点在于记录；不像上述两个功能，重点在于分享社交。</p>
+
+<p>第一版应用的服务器和客户端都是自己亲自来做，因为没有做过网络应用，所以想尝试下，但是两个都不擅长，于是慢慢地一点点摸索，客户端全是发送GET请求进行交互，JSON数据也全是自己手动拼凑……不过好歹也是凑出来了。基本的签到功能，历史数据删查功能，用户的登录，数据同步都有了样子，但是看上去架构太差，只是为了满足功能的东拼西凑，数据的安全、后续升级考虑的较少，而且界面太丑，只能算个学习作品，自己会什么就做成什么样……</p>
+
+<p>以下是第一版的截图：</p>
+
+<p><img src="http://starsight.github.io/images/xingji-1/1.jpg"></p>
+
+<p><img src="http://starsight.github.io/images/xingji-1/2.jpg"></p>
+
+<p><img src="http://starsight.github.io/images/xingji-1/3.jpg"></p>
+
+<p><img src="http://starsight.github.io/images/xingji-1/4.jpg"></p>
+
+<p>第二版后端用了leancloud和腾讯云的TAB服务，后端要考虑的东西大大减少，需要学习一些接口操作等，算是方便了不少。客户端的风格采用侧滑式，照着手机上几款相似的应用（网易云音乐，bilibili，即刻，掘金等）慢慢设计客户端的UI和交互，尽力去实现，实在不能就找开源库或者可替代方案了。</p>
+
+<p>这是第二版的截图：</p>
+
+<p><img src="http://starsight.github.io/images/xingji-1/5.jpg"></p>
+
+<p><img src="http://starsight.github.io/images/xingji-1/6.jpg"></p>
+
+<p><img src="http://starsight.github.io/images/xingji-1/7.jpg"></p>
+
+<p>好了，第二篇开始具体讲重构过程中的具体技术问题，目前没能力谈架构，先做好技术细节，慢慢总结，复杂的问题以后也会慢慢遇到和解决的。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Raspberry Pi 3 Opencv+python的人脸识别]]></title>
@@ -1187,15 +1233,6 @@ Pi3和微雪的屏</p>
 <p>可能有些人觉得，这其实是毅力的问题。确实是，但有时候我发现我被“毅力”这个词给绑架了。我很多时候都会以毅力的名义告诉自己不能放弃，但实际上呢？我这些事情很多都失败了，或者说效率很低。有些人平时不是很有毅力（或者感觉自己没有毅力），但有些人呢，可能做得所谓有毅力的事情太多了，反而觉得，自己有毅力做下去了，即使做差了，问心无愧了。我可能就属于后者，心灵鸡汤听多了，鸡血打足了。有时候放弃反而是正确的选择。有些人不懂坚持，而我属于那些不懂放弃的人。</p>
 
 <p>此为属于第一篇文章，比较乱。东西用起来还很不熟练，还有很多话没说，以后还会有机会的，慢慢说，慢慢思考。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[如果你想去做的话]]></title>
-    <link href="http://starsight.github.io/blog/2015/01/03/if-you-like/"/>
-    <updated>2015-01-03T18:28:45+08:00</updated>
-    <id>http://starsight.github.io/blog/2015/01/03/if-you-like</id>
-    <content type="html"><![CDATA[<h3>少年，年轻是用来做你不敢的事，而不是做你会的事的呢。</h3>
 ]]></content>
   </entry>
   
