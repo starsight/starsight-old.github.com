@@ -4,7 +4,7 @@
   <title><![CDATA[Starsight]]></title>
   <link href="http://starsight.github.io/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-10-16T10:53:51+08:00</updated>
+  <updated>2016-10-16T10:58:04+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[行迹v0.6版本概述总结]]></title>
+    <title type="html"><![CDATA[行迹V0.6版本概述总结]]></title>
     <link href="http://starsight.github.io/blog/2016/10/15/xingji-2/"/>
     <updated>2016-10-15T10:42:02+08:00</updated>
     <id>http://starsight.github.io/blog/2016/10/15/xingji-2</id>
@@ -45,8 +45,9 @@
 <p>左侧头像点击进去就是个人的动态，目前包括签到信息，喜欢和被喜欢的信息，在头像位置进入个人资料设定（EditUserInfoActivity）就可以编辑个人资料。
 以上就是大体的从界面入手简析了工程内容，当然应用的注册登录这块做的时间已经比较长了，留到以后有空简单说一下。</p>
 
-<p>下载链接：<a href="http://123.206.214.17/xingji/xingji.apk">最新版行迹</a><br/>
-扫描二维码：
+<p>下载链接：<a href="http://123.206.214.17/xingji/xingji.apk">最新版行迹</a></p>
+
+<p>扫描二维码：
 <img src="http://starsight.github.io/images/xingji-2/1.png"></p>
 ]]></content>
   </entry>
