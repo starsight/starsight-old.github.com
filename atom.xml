@@ -4,7 +4,7 @@
   <title><![CDATA[Starsight]]></title>
   <link href="http://starsight.github.io/atom.xml" rel="self"/>
   <link href="http://starsight.github.io/"/>
-  <updated>2016-10-16T10:58:04+08:00</updated>
+  <updated>2016-10-16T10:59:43+08:00</updated>
   <id>http://starsight.github.io/</id>
   <author>
     <name><![CDATA[wenjie]]></name>
@@ -47,8 +47,9 @@
 
 <p>下载链接：<a href="http://123.206.214.17/xingji/xingji.apk">最新版行迹</a></p>
 
-<p>扫描二维码：
-<img src="http://starsight.github.io/images/xingji-2/1.png"></p>
+<p>扫描二维码：</p>
+
+<p><img src="http://starsight.github.io/images/xingji-2/1.png"></p>
 ]]></content>
   </entry>
   
